@@ -1,4 +1,11 @@
 package com.example.aplicacionentrenos.domain.model
 
-class ClienteDTO {
-}
+data class ClienteDTO (
+
+    val username : String,
+    val password : String,
+    val nombre : String,
+    val apellidos : String,
+    val id : Int? = null,
+    val idEntrenador : Int? = null
+)

@@ -17,11 +17,12 @@ import com.example.aplicacionentrenos.ui.screens.login.LoginBox
 import com.example.aplicacionentrenos.ui.theme.AzulLogin
 import com.example.aplicacionentrenos.ui.theme.GrisFondo
 import com.example.aplicacionentrenos.ui.theme.secondaryLightColor
+import com.example.aplicacionentrenos.utils.UiEvents
 
 @Composable
-fun MainScreen(navController: NavHostController) {
+fun MainScreen(onNavigate: (UiEvents.Navigate) -> Unit,) {
     MyEntrenosApp {
-        Scaffold { padding ->
+        Scaffold {
             Row(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -36,7 +37,7 @@ fun MainScreen(navController: NavHostController) {
                     .background(GrisFondo)
                     .shadow(2.dp, shape = RoundedCornerShape(5.dp))
                     ) {
-                    LoginBox(navController)
+                    LoginBox(onNavigate = onNavigate)
                 }
             }
 

@@ -1,4 +1,4 @@
-package com.example.aplicacionentrenos.ui.screens.login
+package com.example.aplicacionentrenos.ui.screens.registro
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,15 +19,21 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
+class RegistroViewModel @Inject constructor(
     private val authRepository: AuthRepository
-) : ViewModel() {
+) : ViewModel(){
 
 
-    var username by mutableStateOf("")
+    var taNombre by mutableStateOf("")
         private set
 
-    var password by mutableStateOf("")
+    var taApellidos by mutableStateOf("")
+        private set
+
+    var taUsername by mutableStateOf("")
+        private set
+
+    var taPassw by mutableStateOf("")
         private set
 
     var loading by mutableStateOf(false)
@@ -37,24 +43,26 @@ class LoginViewModel @Inject constructor(
     val uiEvent = _uiEvent.receiveAsFlow()
 
 
-    fun handleEvent(event: LoginContract.Eventos) {
-
-        when (event) {
-            is LoginContract.Eventos.onUsernameChange -> {
-                username = event.username
+    fun handleEvent(event : RegistroContract.Eventos){
+        when(event){
+            is RegistroContract.Eventos.NavigateToLogin -> {
+                sendUiEvent(UiEvents.Navigate(NavigationConstants.MAIN_ROUTE))
             }
-
-            is LoginContract.Eventos.onPasswordChange -> {
-                password = event.passw
+            is RegistroContract.Eventos.OnNombreChange -> {
+                taNombre = event.nombre
             }
-
-            is LoginContract.Eventos.navToRegistro -> {
-                sendUiEvent(UiEvents.Navigate(NavigationConstants.REGISTRO_ROUTE))
+            is RegistroContract.Eventos.OnApellidosChange -> {
+                taApellidos  = event.apellidos
             }
-
-            is LoginContract.Eventos.doLogin -> {
+            is RegistroContract.Eventos.OnUsernameChange -> {
+                taUsername = event.username
+            }
+            is RegistroContract.Eventos.OnPasswordChange -> {
+                taPassw = event.password
+            }
+            is RegistroContract.Eventos.Registrarse -> {
                 viewModelScope.launch {
-                    authRepository.login(event.userDTO)
+                    authRepository.registro(event.clienteDTO)
                         .catch(action = { error ->
                             sendUiEvent(
                                 UiEvents.ShowSnackBar(error.message ?: "error")
@@ -63,10 +71,8 @@ class LoginViewModel @Inject constructor(
                         .collect { result ->
                             when (result) {
                                 is NetworkResult.Success -> {
-                                    UserCache.username = username
-                                    UserCache.password = password
                                     loading = false
-                                    sendUiEvent(UiEvents.Navigate(NavigationConstants.PRINCIPAL_SCREEN_ROUTE))
+                                    sendUiEvent(UiEvents.ShowSnackBar("Usuario Registrado"))
                                 }
                                 is NetworkResult.Error -> {
                                     sendUiEvent(
@@ -83,11 +89,13 @@ class LoginViewModel @Inject constructor(
                         }
                 }
 
+
             }
 
         }
 
     }
+
 
     private fun sendUiEvent(event: UiEvents) {
         viewModelScope.launch {
