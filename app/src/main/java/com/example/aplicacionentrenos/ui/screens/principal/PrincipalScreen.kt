@@ -21,36 +21,7 @@ fun PrincipalScreen(
     navController: NavHostController,
 ) {
     Scaffold(
-        bottomBar = {
-            BottomBarNavigation(
-                items = listOf(
-                    BottomBarItem(
-                        "Home",
-                        NavigationConstants.PRINCIPAL_SCREEN_ROUTE,
-                        Icons.Default.Person
-                    ),
-                    BottomBarItem(
-                        "Entrenadores",
-                        NavigationConstants.ENTRENADORES_ROUTE,
-                        Icons.Default.Person
-                    ),
-                    BottomBarItem(
-                        "Ejercicios",
-                        NavigationConstants.EJERCICIOS_ROUTE,
-                        Icons.Default.Train
-                    ),
-                    BottomBarItem(
-                        "Perfil",
-                        NavigationConstants.PERFIL_ROUTE,
-                        Icons.Default.PersonAdd
-                    )
-                ),
-                navController = navController,
-                onItemClick = {
-                    navController.navigate(it.ruta)
-                }
-            )
-        }
+
     ) {
 
     }

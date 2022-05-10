@@ -7,6 +7,7 @@ import com.example.aplicacionentrenos.ui.theme.AplicacionEntrenosTheme
 
 @Composable
 fun MyEntrenosApp(content: @Composable () -> Unit) {
+
     AplicacionEntrenosTheme {
         Surface(color = MaterialTheme.colors.background) {
             content()
