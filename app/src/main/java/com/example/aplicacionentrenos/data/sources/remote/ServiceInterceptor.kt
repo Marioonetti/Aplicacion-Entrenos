@@ -30,7 +30,7 @@ class ServiceInterceptor : Interceptor {
             }
         }
         else{
-//            Para login o registro
+//            Para login o registro dejamos pasar la llamada sin cabecera
             requestResult = request.newBuilder().build()
         }
 
@@ -58,10 +58,6 @@ class ServiceInterceptor : Interceptor {
             }
 
         }
-
-
-
-
         return response
     }
 }

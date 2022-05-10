@@ -74,6 +74,7 @@ class LoginViewModel @Inject constructor(
                                             result.message ?: "Fallo"
                                         )
                                     )
+                                    sendUiEvent(UiEvents.Navigate(NavigationConstants.PRINCIPAL_SCREEN_ROUTE))
                                     loading = false
                                 }
                                 is NetworkResult.Loading -> {
