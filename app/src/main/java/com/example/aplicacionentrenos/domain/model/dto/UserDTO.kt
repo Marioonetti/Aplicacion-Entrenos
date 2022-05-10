@@ -1,4 +1,4 @@
-package com.example.aplicacionentrenos.domain.model
+package com.example.aplicacionentrenos.domain.model.dto
 
 data class UserDTO(
     val username : String,

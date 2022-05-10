@@ -16,9 +16,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.aplicacionentrenos.domain.model.BottomBarItem
+import com.example.aplicacionentrenos.domain.model.bo.BottomBarItem
 import com.example.aplicacionentrenos.ui.screens.ejercicios.EjerciciosScreen
-import com.example.aplicacionentrenos.ui.screens.entrenadores.EntrenadoresScreen
+import com.example.aplicacionentrenos.ui.screens.entrenador.EntrenadoresScreen
 import com.example.aplicacionentrenos.ui.screens.main.MainScreen
 import com.example.aplicacionentrenos.ui.screens.perfil.PerfilScreen
 import com.example.aplicacionentrenos.ui.screens.principal.PrincipalScreen

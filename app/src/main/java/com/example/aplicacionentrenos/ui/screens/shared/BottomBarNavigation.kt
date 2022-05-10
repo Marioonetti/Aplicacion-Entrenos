@@ -16,9 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.aplicacionentrenos.domain.model.BottomBarItem
+import com.example.aplicacionentrenos.domain.model.bo.BottomBarItem
 import com.example.aplicacionentrenos.ui.theme.GrisFondo
-import java.lang.reflect.Modifier
 
 @Composable
 fun BottomBarNavigation(

@@ -1,6 +1,6 @@
 package com.example.aplicacionentrenos.ui.screens.login
 
-import com.example.aplicacionentrenos.domain.model.UserDTO
+import com.example.aplicacionentrenos.domain.model.dto.UserDTO
 
 interface LoginContract {
 

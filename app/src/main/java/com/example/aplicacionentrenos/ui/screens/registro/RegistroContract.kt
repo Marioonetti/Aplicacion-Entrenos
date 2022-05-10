@@ -1,6 +1,6 @@
 package com.example.aplicacionentrenos.ui.screens.registro
 
-import com.example.aplicacionentrenos.domain.model.ClienteDTO
+import com.example.aplicacionentrenos.domain.model.dto.ClienteDTO
 
 interface RegistroContract {
 

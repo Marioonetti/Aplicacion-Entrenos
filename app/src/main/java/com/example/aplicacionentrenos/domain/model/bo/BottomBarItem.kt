@@ -1,4 +1,4 @@
-package com.example.aplicacionentrenos.domain.model
+package com.example.aplicacionentrenos.domain.model.bo
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

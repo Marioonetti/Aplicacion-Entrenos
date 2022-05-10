@@ -2,9 +2,7 @@ package com.example.aplicacionentrenos.data.repository
 
 import com.example.aplicacionentrenos.data.sources.remote.EjerciciosDataSource
 import com.example.aplicacionentrenos.data.sources.remote.utils.NetworkResult
-import com.example.aplicacionentrenos.domain.model.ClienteDTO
-import com.example.aplicacionentrenos.domain.model.EjercicioDTO
-import com.example.aplicacionentrenos.domain.model.UserDTO
+import com.example.aplicacionentrenos.domain.model.dto.EjercicioDTO
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

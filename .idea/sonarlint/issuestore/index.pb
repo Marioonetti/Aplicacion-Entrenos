@@ -1,9 +1,6 @@
 
 F
 app/proguard-rules.pro,9\e\9e08934d811afe28fbc77aaa3c0d747b94348db9
-:
-
-.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 ;
@@ -24,19 +21,38 @@ X
 Rapp/src/androidTest/java/com/example/aplicacionentrenos/ExampleInstrumentedTest.kt,9\6\96eddab7631e9169db109b2ad3dd8baa0cc0ff1c
 t
 Dapp/src/main/java/com/example/aplicacionentrenos/ui/MyEntrenosApp.kt,6\3\63518b85975de6f7f2ed8f0f1f6caed3ae6ae2a6
-
-Qapp/src/main/java/com/example/aplicacionentrenos/ui/screens/main/MainViewModel.kt,9\2\9249d6f767959abe72789711f2f90b136ecde8ae
 s
 Capp/src/test/java/com/example/aplicacionentrenos/ExampleUnitTest.kt,2\3\23d4fa4db1d79e26fc73a6f432297df3fa66c085
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 >
 app/.gitignore,5\1\51e1c5d383dfaa35e0e7e5873a0a99355a86880f
-x
-Happ/src/main/java/com/example/aplicacionentrenos/domain/model/UserDTO.kt,5\7\5787910ab3be239e360dd825790830f9bbbeb2c2
 r
 Bapp/src/main/java/com/example/aplicacionentrenos/ui/theme/Color.kt,c\6\c65f00f1c310f7298d7cd28c083fc74c04244a2d
 r
 Bapp/src/main/java/com/example/aplicacionentrenos/ui/theme/Theme.kt,d\0\d060aebda61196730f2c16caa4e279233706e3af
 n
 >app/src/main/java/com/example/aplicacionentrenos/EntrenoApp.kt,2\0\201d6ee9c318a2572a5df6ef99b4e5a14ffdbd5a
+‹
+[app/src/main/java/com/example/aplicacionentrenos/data/sources/remote/utils/NetworkResult.kt,7\d\7ddbb0f53e16d83476451a39b5faac4328efa93c
+‰
+Yapp/src/main/java/com/example/aplicacionentrenos/ui/screens/registro/RegistroViewModel.kt,b\8\b8d1329a16af19462f6b93005ad58950ff5ec750
+}
+Mapp/src/main/java/com/example/aplicacionentrenos/utils/NavigationConstants.kt,f\1\f1d7d441721bef888566fb7c7dbaee540a526b53
+Š
+Zapp/src/main/java/com/example/aplicacionentrenos/ui/screens/ejercicios/EjerciciosScreen.kt,1\d\1d1505953e283dd091e3758cdf54aa84b77c7687
+r
+Bapp/src/main/java/com/example/aplicacionentrenos/utils/UiEvents.kt,d\8\d8ed62da0297d69085df8bb14f516fc7ebda969d
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+s
+Capp/src/main/java/com/example/aplicacionentrenos/utils/UserCache.kt,d\c\dcf1895901cd76721ba78a2dd2375d99d3529744
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+Š
+Zapp/src/main/java/com/example/aplicacionentrenos/data/sources/remote/ServiceInterceptor.kt,1\e\1ec4df3fe826b07f5c4359498d4e81f0fdc3fb9f
+ˆ
+Xapp/src/main/java/com/example/aplicacionentrenos/data/sources/remote/di/NetworkModule.kt,3\2\32f49b5a8cb365ea4722de26d341447d2f65afa0
+„
+Tapp/src/main/java/com/example/aplicacionentrenos/data/repository/PerfilRepository.kt,2\d\2d6d6fb54f93d6545c3b2c1565b8d16858d0295a

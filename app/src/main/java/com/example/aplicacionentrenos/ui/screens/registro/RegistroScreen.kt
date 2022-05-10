@@ -11,9 +11,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
-import com.example.aplicacionentrenos.domain.model.ClienteDTO
-import com.example.aplicacionentrenos.ui.screens.login.LoginContract
+import com.example.aplicacionentrenos.domain.model.dto.ClienteDTO
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
 

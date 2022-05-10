@@ -1,6 +1,6 @@
 package com.example.aplicacionentrenos.data.sources.remote.retrofit
 
-import com.example.aplicacionentrenos.domain.model.EntrenoDTO
+import com.example.aplicacionentrenos.domain.model.dto.EntrenoDTO
 import retrofit2.Response
 import retrofit2.http.GET
 
