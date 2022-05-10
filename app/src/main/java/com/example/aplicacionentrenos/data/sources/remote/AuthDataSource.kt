@@ -6,7 +6,7 @@ import com.example.aplicacionentrenos.domain.model.ClienteDTO
 import com.example.aplicacionentrenos.domain.model.UserDTO
 import javax.inject.Inject
 
-class RemoteDataSource @Inject constructor(
+class AuthDataSource @Inject constructor(
     private val authService: AuthService
 ) : BaseApiResponse(){
 

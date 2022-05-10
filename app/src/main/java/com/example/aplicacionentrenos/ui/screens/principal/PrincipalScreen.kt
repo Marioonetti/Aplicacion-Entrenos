@@ -15,16 +15,10 @@ import com.example.aplicacionentrenos.utils.NavigationConstants
 import com.example.aplicacionentrenos.utils.UiEvents
 
 @Composable
-
 fun PrincipalScreen(
     onNavigate: (UiEvents.Navigate) -> Unit,
     navController: NavHostController,
 ) {
-    Scaffold(
-
-    ) {
-
-    }
 
     Text(text = "Principal Screen")
 

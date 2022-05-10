@@ -9,7 +9,9 @@ object RestConstants {
 
 
     const val EJERCICIOS_PATH = "ejercicios"
+    const val EJERCICIO_PATH_PARAM = "/{id}"
 
     const val ENTRENADORES_PATH = "entrenadores"
+    const val ENTRENADOR_PATH_PARAM = "/{id}"
 
 }

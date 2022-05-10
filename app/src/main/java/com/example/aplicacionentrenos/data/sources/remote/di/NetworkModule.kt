@@ -2,6 +2,9 @@ package com.example.aplicacionentrenos.data.sources.remote.di
 
 import com.example.aplicacionentrenos.data.sources.remote.ServiceInterceptor
 import com.example.aplicacionentrenos.data.sources.remote.retrofit.AuthService
+import com.example.aplicacionentrenos.data.sources.remote.retrofit.EjercicioService
+import com.example.aplicacionentrenos.data.sources.remote.retrofit.EntrenadorService
+import com.example.aplicacionentrenos.data.sources.remote.retrofit.EntrenosService
 import com.example.aplicacionentrenos.data.sources.remote.utils.RestConstants
 import dagger.Module
 import dagger.Provides
@@ -59,6 +62,21 @@ object NetworkModule {
     @Provides
     fun provideAuthService(retrofit: Retrofit): AuthService =
         retrofit.create(AuthService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideEjercicioService(retrofit: Retrofit): EjercicioService =
+        retrofit.create(EjercicioService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideEntrenadorService(retrofit: Retrofit): EntrenadorService =
+        retrofit.create(EntrenadorService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideEntrenosService(retrofit: Retrofit): EntrenosService =
+        retrofit.create(EntrenosService::class.java)
 
 
 }
