@@ -12,13 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.aplicacionentrenos.domain.model.bo.BottomBarItem
 import com.example.aplicacionentrenos.ui.screens.ejercicios.EjerciciosScreen
-import com.example.aplicacionentrenos.ui.screens.entrenador.EntrenadoresScreen
+import com.example.aplicacionentrenos.ui.screens.entrenador.detalles.EntrenadorDetallesScreen
+import com.example.aplicacionentrenos.ui.screens.entrenador.general.EntrenadoresScreen
 import com.example.aplicacionentrenos.ui.screens.main.MainScreen
 import com.example.aplicacionentrenos.ui.screens.perfil.PerfilScreen
 import com.example.aplicacionentrenos.ui.screens.principal.PrincipalScreen
@@ -121,6 +124,22 @@ class MainActivity : ComponentActivity() {
                     composable(NavigationConstants.EJERCICIOS_ROUTE){
                         EjerciciosScreen(
                             onNavigate = { navController.navigate(it.route)}
+                        )
+                    }
+                    composable(
+                        route = NavigationConstants.DETALLES_ENTRENADOR,
+                        arguments = listOf(
+                            navArgument(
+                                NavigationConstants.DETALLES_ENTRENADOR_ID_PARAM)
+                            {
+                                type = NavType.IntType
+                            })
+                    ){
+                        val id =
+                            it.arguments?.getInt(NavigationConstants.DETALLES_ENTRENADOR_ID_PARAM)
+
+                        EntrenadorDetallesScreen(
+                            id
                         )
                     }
                 }

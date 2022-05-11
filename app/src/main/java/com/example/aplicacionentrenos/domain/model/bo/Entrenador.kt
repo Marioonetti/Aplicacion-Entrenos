@@ -4,5 +4,7 @@ data class Entrenador (
     val id : Int,
     val nombre : String,
     val apellidos : String,
-    val descripcion : String
+    val descripcion : String,
+    val imagen : String,
+    val edad : Int
 )

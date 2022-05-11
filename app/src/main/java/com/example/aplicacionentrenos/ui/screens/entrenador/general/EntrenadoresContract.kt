@@ -1,4 +1,4 @@
-package com.example.aplicacionentrenos.ui.screens.entrenador
+package com.example.aplicacionentrenos.ui.screens.entrenador.general
 
 import com.example.aplicacionentrenos.domain.model.bo.Entrenador
 

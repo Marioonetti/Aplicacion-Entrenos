@@ -1,4 +1,4 @@
-package com.example.aplicacionentrenos.ui.screens.entrenador
+package com.example.aplicacionentrenos.ui.screens.entrenador.general
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplicacionentrenos.data.repository.EntrenadorRepository
 import com.example.aplicacionentrenos.data.sources.remote.utils.NetworkResult
+import com.example.aplicacionentrenos.domain.model.bo.Entrenador
+import com.example.aplicacionentrenos.utils.NavigationConstants
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
@@ -25,6 +27,10 @@ class EntrenadoresViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvents>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
+   init {
+       handleEvent(EntrenadoresContract.Eventos.GetAll)
+   }
+
     private val _uiState:
             MutableStateFlow<EntrenadoresContract.EntrenadoresState> by lazy {
         MutableStateFlow(EntrenadoresContract.EntrenadoresState())
@@ -34,6 +40,12 @@ class EntrenadoresViewModel @Inject constructor(
 
     fun handleEvent(event : EntrenadoresContract.Eventos){
         when(event){
+            is EntrenadoresContract.Eventos.NavToInformacion -> {
+                sendUiEvent(
+                    UiEvents.Navigate(NavigationConstants.NAVIGATE_TO_DETALLES_ENTRENADOR + event.id)
+                )
+            }
+
             is EntrenadoresContract.Eventos.GetAll -> {
                 viewModelScope.launch {
                     entrenadorRepository.getAll()

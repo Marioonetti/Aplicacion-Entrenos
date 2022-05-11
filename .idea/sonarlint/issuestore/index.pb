@@ -1,6 +1,4 @@
 
-F
-app/proguard-rules.pro,9\e\9e08934d811afe28fbc77aaa3c0d747b94348db9
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 ;
@@ -23,12 +21,8 @@ t
 Dapp/src/main/java/com/example/aplicacionentrenos/ui/MyEntrenosApp.kt,6\3\63518b85975de6f7f2ed8f0f1f6caed3ae6ae2a6
 s
 Capp/src/test/java/com/example/aplicacionentrenos/ExampleUnitTest.kt,2\3\23d4fa4db1d79e26fc73a6f432297df3fa66c085
-@
-app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 >
 app/.gitignore,5\1\51e1c5d383dfaa35e0e7e5873a0a99355a86880f
-r
-Bapp/src/main/java/com/example/aplicacionentrenos/ui/theme/Color.kt,c\6\c65f00f1c310f7298d7cd28c083fc74c04244a2d
 r
 Bapp/src/main/java/com/example/aplicacionentrenos/ui/theme/Theme.kt,d\0\d060aebda61196730f2c16caa4e279233706e3af
 n
@@ -37,8 +31,6 @@ n
 [app/src/main/java/com/example/aplicacionentrenos/data/sources/remote/utils/NetworkResult.kt,7\d\7ddbb0f53e16d83476451a39b5faac4328efa93c
 ‰
 Yapp/src/main/java/com/example/aplicacionentrenos/ui/screens/registro/RegistroViewModel.kt,b\8\b8d1329a16af19462f6b93005ad58950ff5ec750
-}
-Mapp/src/main/java/com/example/aplicacionentrenos/utils/NavigationConstants.kt,f\1\f1d7d441721bef888566fb7c7dbaee540a526b53
 Š
 Zapp/src/main/java/com/example/aplicacionentrenos/ui/screens/ejercicios/EjerciciosScreen.kt,1\d\1d1505953e283dd091e3758cdf54aa84b77c7687
 r
