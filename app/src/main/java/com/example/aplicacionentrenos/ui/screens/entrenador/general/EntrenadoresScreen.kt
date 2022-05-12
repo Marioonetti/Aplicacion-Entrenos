@@ -4,10 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.*
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -25,9 +26,14 @@ fun EntrenadoresScreen(
     viewModel: EntrenadoresViewModel = hiltViewModel()
 ) {
 
+    val listaEntrenadores = viewModel.entrenadores.
+    collectAsState().
+    value.
+    entrenadores
+
     val scaffoldState = rememberScaffoldState()
     LaunchedEffect(key1 = true) {
-
+        viewModel.handleEvent(EntrenadoresContract.Eventos.GetAll)
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvents.ShowSnackBar -> {
@@ -51,10 +57,11 @@ fun EntrenadoresScreen(
     }
 
     LazyColumn(){
-        items(viewModel.uiState.value.entrenadores){
-            entrenador ->
+        items(listaEntrenadores){
+                entrenador ->
             EntrenadorItem(entrenador, viewModel::handleEvent)
         }
+
     }
 
 

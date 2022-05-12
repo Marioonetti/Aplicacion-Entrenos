@@ -108,14 +108,16 @@ fun RegistroScreen(
                 }) {
                     Text(text = "Registrarse")
                 }
+
+                if(viewModel.loading){
+                    CircularProgressIndicator()
+                }
             }
 
 
         }
+
     }
-
-
-
 
 
 

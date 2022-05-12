@@ -37,8 +37,6 @@ r
 Bapp/src/main/java/com/example/aplicacionentrenos/utils/UiEvents.kt,d\8\d8ed62da0297d69085df8bb14f516fc7ebda969d
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-s
-Capp/src/main/java/com/example/aplicacionentrenos/utils/UserCache.kt,d\c\dcf1895901cd76721ba78a2dd2375d99d3529744
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
@@ -48,3 +46,7 @@ Zapp/src/main/java/com/example/aplicacionentrenos/data/sources/remote/ServiceInt
 Xapp/src/main/java/com/example/aplicacionentrenos/data/sources/remote/di/NetworkModule.kt,3\2\32f49b5a8cb365ea4722de26d341447d2f65afa0
 „
 Tapp/src/main/java/com/example/aplicacionentrenos/data/repository/PerfilRepository.kt,2\d\2d6d6fb54f93d6545c3b2c1565b8d16858d0295a
+~
+Napp/src/main/java/com/example/aplicacionentrenos/domain/model/bo/Entrenador.kt,d\1\d1a025e6e835dbb5a314e1e42ddcfa99f28c15c4
+‚
+Rapp/src/main/java/com/example/aplicacionentrenos/domain/datamappers/Datamappers.kt,c\8\c8f22d6304480a114a1b8ca0ddce68affa327915

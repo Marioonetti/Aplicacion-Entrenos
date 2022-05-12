@@ -1,6 +1,7 @@
 package com.example.aplicacionentrenos.ui.screens.entrenador.general
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -24,18 +25,17 @@ class EntrenadoresViewModel @Inject constructor(
     var loading by mutableStateOf(false)
         private set
 
+    private val _entrenadores: MutableStateFlow<EntrenadoresContract.EntrenadoresState> by lazy {
+        MutableStateFlow(EntrenadoresContract.EntrenadoresState())
+    }
+    val entrenadores: StateFlow<EntrenadoresContract.EntrenadoresState> = _entrenadores
+
     private val _uiEvent = Channel<UiEvents>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-   init {
-       handleEvent(EntrenadoresContract.Eventos.GetAll)
-   }
-
-    private val _uiState:
-            MutableStateFlow<EntrenadoresContract.EntrenadoresState> by lazy {
-        MutableStateFlow(EntrenadoresContract.EntrenadoresState())
+    init {
+        handleEvent(EntrenadoresContract.Eventos.GetAll)
     }
-    val uiState: StateFlow<EntrenadoresContract.EntrenadoresState> = _uiState
 
 
     fun handleEvent(event : EntrenadoresContract.Eventos){
@@ -58,7 +58,7 @@ class EntrenadoresViewModel @Inject constructor(
                             when (result) {
                                 is NetworkResult.Success -> {
                                     loading = false
-                                    _uiState.update {
+                                    _entrenadores.update {
                                         it.copy(
                                             entrenadores = result.data ?: emptyList()
                                         )
