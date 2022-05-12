@@ -139,7 +139,8 @@ class MainActivity : ComponentActivity() {
                             it.arguments?.getInt(NavigationConstants.DETALLES_ENTRENADOR_ID_PARAM)
 
                         EntrenadorDetallesScreen(
-                            id
+                            id,
+                            onNavigate = { navController.navigate(it.route)}
                         )
                     }
                 }

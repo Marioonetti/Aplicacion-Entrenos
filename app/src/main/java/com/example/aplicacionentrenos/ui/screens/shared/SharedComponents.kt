@@ -46,3 +46,33 @@ fun Imagen(ruta: String) {
 
 
 }
+
+@OptIn(ExperimentalCoilApi::class)
+@Composable
+fun ImagenFull(ruta: String) {
+
+    Box {
+        val painter = rememberImagePainter(
+            data = ruta,
+            builder = {
+                size(OriginalSize)
+                scale(Scale.FILL)
+                crossfade(true)
+            })
+//        Estado de la imagen
+        val painterState = painter.state
+
+        Image(
+            painter = painter,
+            contentDescription = "Imagen",
+            contentScale = ContentScale.Fit,
+        )
+//        Si su estado es cargando, ponemos la ciruclar progress bar
+        if (painterState is ImagePainter.State.Loading) {
+            CircularProgressIndicator()
+        }
+
+    }
+
+
+}
