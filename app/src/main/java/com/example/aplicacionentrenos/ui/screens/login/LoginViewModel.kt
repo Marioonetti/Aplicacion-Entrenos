@@ -67,6 +67,7 @@ class LoginViewModel @Inject constructor(
                                 is NetworkResult.Success -> {
                                     UserCache.username = username
                                     UserCache.password = password
+                                    UserCache.id = result.data?.id!!
                                     loading = false
                                     sendUiEvent(UiEvents.Navigate(NavigationConstants.PRINCIPAL_SCREEN_ROUTE))
                                 }

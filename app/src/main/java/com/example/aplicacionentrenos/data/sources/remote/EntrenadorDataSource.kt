@@ -3,6 +3,7 @@ package com.example.aplicacionentrenos.data.sources.remote
 import com.example.aplicacionentrenos.data.sources.remote.retrofit.EntrenadorService
 import com.example.aplicacionentrenos.data.sources.remote.utils.BaseApiResponse
 import com.example.aplicacionentrenos.domain.datamappers.toEntrenador
+import com.example.aplicacionentrenos.domain.model.dto.ClienteDTO
 import javax.inject.Inject
 
 class EntrenadorDataSource @Inject constructor(
@@ -19,5 +20,8 @@ class EntrenadorDataSource @Inject constructor(
         transform = { it.toEntrenador() }
     )
 
+    suspend fun altaEntrenador(clienteDto : ClienteDTO) = safeApiCall(
+        apiCall = { entrenadorService.altaEntrenador(clienteDto) }
+    )
 
 }

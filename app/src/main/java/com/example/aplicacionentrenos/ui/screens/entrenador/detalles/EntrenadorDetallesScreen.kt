@@ -10,9 +10,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.aplicacionentrenos.domain.model.dto.ClienteDTO
 import com.example.aplicacionentrenos.ui.screens.shared.ImagenFull
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
 import com.example.aplicacionentrenos.utils.UiEvents
+import com.example.aplicacionentrenos.utils.UserCache
 import kotlinx.coroutines.flow.collect
 
 
@@ -105,7 +107,11 @@ fun EntrenadorDetallesScreen(
                     )
                 }
 
-                Button(onClick = { /*TODO*/ }) {
+                Button(onClick = {
+                    viewModel.handleEvent(DetallesEntrenadorContract.Eventos.AltaEntrenador(
+                        ClienteDTO("", "", "", "" ,UserCache.id, it.id)
+                    ))
+                }) {
                     Text(text = "Contratar")
                 }
 

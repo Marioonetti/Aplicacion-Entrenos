@@ -14,4 +14,8 @@ object RestConstants {
     const val ENTRENADORES_PATH = "entrenador"
     const val ENTRENADOR_PATH_PARAM = "/{id}"
 
+
+    const val CLIENTE_PATH = "cliente"
+    const val CLIENTE_ALTA_PATH = "/alta"
+
 }

@@ -1,6 +1,7 @@
 package com.example.aplicacionentrenos.data.sources.remote.retrofit
 
 import com.example.aplicacionentrenos.data.sources.remote.utils.RestConstants
+import com.example.aplicacionentrenos.domain.model.dto.ClienteDTO
 import com.example.aplicacionentrenos.domain.model.dto.EntrenadorDTO
 import retrofit2.Response
 import retrofit2.http.Body
@@ -16,6 +17,6 @@ interface EntrenadorService {
     @GET(RestConstants.ENTRENADORES_PATH+RestConstants.ENTRENADOR_PATH_PARAM)
     suspend fun getEntrenadorById(@Path("id") id : Int) : Response<EntrenadorDTO>
 
-    @PUT(RestConstants.ENTRENADORES_PATH+RestConstants.ENTRENADOR_PATH_PARAM)
-    suspend fun altaEntrenador(@Body id : Int) : Response<EntrenadorDTO>
+    @PUT(RestConstants.CLIENTE_PATH+RestConstants.CLIENTE_ALTA_PATH)
+    suspend fun altaEntrenador(@Body clienteDTO: ClienteDTO) : Response<ClienteDTO>
 }

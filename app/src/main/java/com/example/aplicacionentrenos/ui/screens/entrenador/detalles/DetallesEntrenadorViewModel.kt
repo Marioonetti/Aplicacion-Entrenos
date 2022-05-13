@@ -74,7 +74,34 @@ class DetallesEntrenadorViewModel @Inject constructor(
             }
 
             is DetallesEntrenadorContract.Eventos.AltaEntrenador -> {
-//                TODO LLamar funcion
+                viewModelScope.launch {
+                    entrenadorRepository.altaEnrenador(event.clienteDTO)
+                        .catch(action = { error ->
+                            sendUiEvent(
+                                UiEvents.ShowSnackBar(error.message ?: "error")
+                            )
+                        })
+                        .collect { result ->
+                            when (result) {
+                                is NetworkResult.Success -> {
+                                    loading = false
+                                   sendUiEvent(UiEvents.ShowSnackBar("Entrenador dado de alta correctamente"))
+
+                                }
+                                is NetworkResult.Error -> {
+                                    sendUiEvent(
+                                        UiEvents.ShowSnackBar(
+                                            result.message ?: "Fallo"
+                                        )
+                                    )
+                                    loading = false
+                                }
+                                is NetworkResult.Loading -> {
+                                    loading = true
+                                }
+                            }
+                        }
+                }
             }
         }
 
