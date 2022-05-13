@@ -24,6 +24,8 @@ class RegistroViewModel @Inject constructor(
 ) : ViewModel(){
 
 
+    var hidden by mutableStateOf(true)
+
     var taNombre by mutableStateOf("")
         private set
 

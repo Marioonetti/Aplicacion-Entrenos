@@ -21,7 +21,7 @@ import com.example.aplicacionentrenos.utils.UiEvents
 
 @Composable
 fun MainScreen(onNavigate: (UiEvents.Navigate) -> Unit,) {
-    MyEntrenosApp {
+
         Scaffold {
             Row(
                 modifier = Modifier
@@ -43,6 +43,5 @@ fun MainScreen(onNavigate: (UiEvents.Navigate) -> Unit,) {
 
 
         }
-    }
 
 }

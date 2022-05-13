@@ -16,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.aplicacionentrenos.domain.model.bo.Entrenador
 import com.example.aplicacionentrenos.ui.screens.shared.Imagen
+import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
+import com.example.aplicacionentrenos.ui.theme.GrisFondo
 import com.example.aplicacionentrenos.ui.theme.primaryDarkColor
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
@@ -53,16 +55,19 @@ fun EntrenadoresScreen(
         scaffoldState = scaffoldState,
         modifier = Modifier.fillMaxSize()
     ) {
+        Box(modifier =Modifier.padding(it)){
+            LazyColumn{
+                items(listaEntrenadores){
+                        entrenador ->
+                    EntrenadorItem(entrenador, viewModel::handleEvent)
+                }
 
-    }
+            }
 
-    LazyColumn(){
-        items(listaEntrenadores){
-                entrenador ->
-            EntrenadorItem(entrenador, viewModel::handleEvent)
+            LoadProgressBar(viewModel.loading)
         }
-
     }
+
 
 
 
@@ -82,7 +87,7 @@ fun EntrenadorItem(
             },
         elevation = 5.dp
     ) {
-        Row(modifier = Modifier.background(color = primaryDarkColor)) {
+        Row(modifier = Modifier.background(color = GrisFondo)) {
             Imagen(entrenador.imagen)
             OverView(entrenador)
         }
@@ -100,34 +105,35 @@ private fun OverView(entrenador: Entrenador) {
         .fillMaxHeight(),
         verticalArrangement = Arrangement.SpaceEvenly
     ){
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentSize(Alignment.TopCenter),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = entrenador.nombre,
-                style = MaterialTheme.typography.h5
+                style = MaterialTheme.typography.h4
             )
             Text(
                 modifier = Modifier.padding(start = 2.dp),
                 text = entrenador.apellidos,
-                style = MaterialTheme.typography.h5
+                style = MaterialTheme.typography.h6
             )
 
+            Row(
+                modifier = Modifier
+                    .wrapContentSize(Alignment.BottomCenter)
+            ) {
+                Text(
+                    text = "${entrenador.edad} Años",
+                    style = MaterialTheme.typography.h5,
+                    textAlign = TextAlign.Center
+                )
+            }
 
         }
-        Row(
-            modifier = Modifier
-            .wrapContentSize(Alignment.BottomCenter)
-        ) {
-            Text(
-                text = "Edad: ${entrenador.edad}",
-                style = MaterialTheme.typography.h5,
-                textAlign = TextAlign.Center
-            )
-        }
+
 
     }
     

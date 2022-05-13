@@ -32,7 +32,9 @@ fun Imagen(ruta: String) {
         val painterState = painter.state
 
         Image(
-            modifier = Modifier.width(210.dp).fillMaxHeight(),
+            modifier = Modifier
+                .width(210.dp)
+                .fillMaxHeight(),
             painter = painter,
             contentDescription = "Imagen",
             contentScale = ContentScale.Fit,
@@ -56,7 +58,6 @@ fun ImagenFull(ruta: String) {
             data = ruta,
             builder = {
                 size(OriginalSize)
-                scale(Scale.FILL)
                 crossfade(true)
             })
 //        Estado de la imagen
@@ -65,7 +66,7 @@ fun ImagenFull(ruta: String) {
         Image(
             painter = painter,
             contentDescription = "Imagen",
-            contentScale = ContentScale.Fit,
+            contentScale = ContentScale.Crop,
         )
 //        Si su estado es cargando, ponemos la ciruclar progress bar
         if (painterState is ImagePainter.State.Loading) {
@@ -74,5 +75,15 @@ fun ImagenFull(ruta: String) {
 
     }
 
+
+}
+
+
+@Composable
+fun LoadProgressBar(activacion : Boolean){
+
+    if (activacion){
+        CircularProgressIndicator()
+    }
 
 }

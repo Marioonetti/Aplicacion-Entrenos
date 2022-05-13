@@ -20,6 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.aplicacionentrenos.domain.model.bo.BottomBarItem
+import com.example.aplicacionentrenos.ui.MyEntrenosApp
 import com.example.aplicacionentrenos.ui.screens.ejercicios.EjerciciosScreen
 import com.example.aplicacionentrenos.ui.screens.entrenador.detalles.EntrenadorDetallesScreen
 import com.example.aplicacionentrenos.ui.screens.entrenador.general.EntrenadoresScreen
@@ -36,14 +37,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApp()
+            MyEntrenosApp {
+                MyApp()
+            }
         }
     }
 
 
     @Composable
     fun MyApp() {
-        val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
+        val bottomBarState = rememberSaveable { (mutableStateOf(false)) }
         val navController = rememberNavController()
         val navBackStackEntry by navController.currentBackStackEntryAsState()
 

@@ -3,14 +3,23 @@ package com.example.aplicacionentrenos.ui.screens.login
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.aplicacionentrenos.R
 import com.example.aplicacionentrenos.domain.model.dto.UserDTO
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
@@ -21,6 +30,7 @@ fun LoginBox(
     viewModel: LoginViewModel = hiltViewModel()
 ) {
 //Snackbar
+
     val scaffoldState = rememberScaffoldState()
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
@@ -62,7 +72,6 @@ fun LoginBox(
                 onValueChange = {
                     viewModel.handleEvent(LoginContract.Eventos.onUsernameChange(it))
                 },
-                label = { Text(text = "Nombre de Usuario") },
                 singleLine = true
             )
         }
@@ -79,8 +88,16 @@ fun LoginBox(
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 singleLine = true,
-                label = { Text(text = "Contraseña") },
-                visualTransformation = PasswordVisualTransformation()
+                visualTransformation = if (viewModel.hidden)
+                    PasswordVisualTransformation() else VisualTransformation.None,
+                trailingIcon = {
+                    IconButton(onClick = { viewModel.hidden = !viewModel.hidden }) {
+                        val vector : ImageVector =
+                            if (viewModel.hidden) Icons.Default.VisibilityOff
+                            else Icons.Default.Visibility
+                        Icon(imageVector = vector, contentDescription = "Ojo")
+                    }
+                }
             )
         }
 

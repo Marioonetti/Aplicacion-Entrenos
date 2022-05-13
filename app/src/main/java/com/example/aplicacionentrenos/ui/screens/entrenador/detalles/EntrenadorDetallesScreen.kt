@@ -2,17 +2,16 @@ package com.example.aplicacionentrenos.ui.screens.entrenador.detalles
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.aplicacionentrenos.ui.screens.shared.ImagenFull
+import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
 
@@ -23,11 +22,12 @@ fun EntrenadorDetallesScreen(
     id: Int?,
     viewModel: DetallesEntrenadorViewModel = hiltViewModel()
 ) {
+    val entrenador = viewModel.uiState.collectAsState().value.entrenador
 
     val scaffoldState = rememberScaffoldState()
     LaunchedEffect(key1 = true) {
 
-        id?.let{
+        id?.let {
             viewModel.handleEvent(DetallesEntrenadorContract.Eventos.PedirEntrenador(it))
         }
         viewModel.uiEvent.collect { event ->
@@ -50,37 +50,69 @@ fun EntrenadorDetallesScreen(
     ) {
 
     }
-
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
+    Row(
+        modifier = Modifier
+            .fillMaxSize(),
+        verticalAlignment = Alignment.Top,
+        horizontalArrangement = Arrangement.Center
     ) {
-        viewModel.uiState.value.entrenador?.let {
-            ImagenFull(ruta = it.imagen)
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
+        ) {
+            entrenador?.let {
+                ImagenFull(ruta = it.imagen)
 
-            Column(
-                modifier = Modifier.height(30.dp),
-                verticalArrangement = Arrangement.SpaceEvenly) {
-
-                Row(
-                    horizontalArrangement = Arrangement.Center
+                Column(
+                    modifier = Modifier.height(150.dp),
+                    verticalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    Text(text = it.nombre)
-                    Text(text = it.apellidos)
+
+                    Row(
+                        modifier = Modifier.width(300.dp),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        Text(
+                            text = it.nombre,
+                            style = MaterialTheme.typography.h4
+                        )
+                        Text(
+                            text = it.apellidos,
+                            style = MaterialTheme.typography.h4
+                        )
+                    }
+
+                    Row(
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = "Edad : ${it.edad}",
+                            style = MaterialTheme.typography.h4
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.padding(top = 10.dp))
+
+                Column {
+                    Text(
+                        text = "Descripción: ",
+                        style = MaterialTheme.typography.h5
+                    )
+
+                    Text(
+                        text = it.descripcion,
+                        style = MaterialTheme.typography.h6
+                    )
                 }
 
-                Text(text = "Edad : ${it.edad}")
-            }
-
-            Box(modifier = Modifier.padding(5.dp)){
-                TextField(value = it.descripcion,
-                    onValueChange ={},
-                )
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Contratar")
+                }
 
             }
-
         }
+
+        LoadProgressBar(viewModel.loading)
 
 
     }
