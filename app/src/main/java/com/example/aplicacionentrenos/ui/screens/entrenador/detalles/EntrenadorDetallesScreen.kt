@@ -2,6 +2,8 @@ package com.example.aplicacionentrenos.ui.screens.entrenador.detalles
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -49,12 +51,11 @@ fun EntrenadorDetallesScreen(
     Scaffold(
         scaffoldState = scaffoldState,
         modifier = Modifier.fillMaxSize()
-    ) {
-
-    }
+    ) {}
     Row(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
         verticalAlignment = Alignment.Top,
         horizontalArrangement = Arrangement.Center
     ) {

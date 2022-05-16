@@ -77,6 +77,7 @@ dependencies {
 
 //    Imagenes
     implementation 'io.coil-kt:coil-compose-base:1.4.0'
+    implementation("io.coil-kt:coil-gif:1.4.0")
 
     // Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:2.4.2"

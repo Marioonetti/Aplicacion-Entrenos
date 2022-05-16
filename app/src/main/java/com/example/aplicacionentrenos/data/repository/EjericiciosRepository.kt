@@ -30,6 +30,14 @@ class EjericiciosRepository @Inject constructor(
     }
 
 
+    fun getByName(value :String) : Flow<NetworkResult<List<EjercicioDTO>>> {
+        return flow{
+            emit(NetworkResult.Loading())
+            emit(ejerciciosDataSource.getByName(value))
+        }.flowOn(Dispatchers.IO)
+    }
+
+
 
 
 }

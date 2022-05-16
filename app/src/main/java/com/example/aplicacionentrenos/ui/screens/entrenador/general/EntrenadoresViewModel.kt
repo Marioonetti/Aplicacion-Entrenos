@@ -33,11 +33,6 @@ class EntrenadoresViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvents>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    init {
-        handleEvent(EntrenadoresContract.Eventos.GetAll)
-    }
-
-
     fun handleEvent(event : EntrenadoresContract.Eventos){
         when(event){
             is EntrenadoresContract.Eventos.NavToInformacion -> {

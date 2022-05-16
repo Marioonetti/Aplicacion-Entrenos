@@ -11,5 +11,5 @@ class EjerciciosDataSource @Inject constructor(
 
     suspend fun getById(id : Int) = safeApiCall(apiCall = {ejercicioService.getById(id)})
 
-
+    suspend fun getByName(value : String) = safeApiCall(apiCall = {ejercicioService.getByName(value)})
 }

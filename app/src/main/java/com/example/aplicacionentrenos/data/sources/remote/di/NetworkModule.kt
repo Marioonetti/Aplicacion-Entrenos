@@ -1,6 +1,6 @@
 package com.example.aplicacionentrenos.data.sources.remote.di
 
-import com.example.aplicacionentrenos.data.sources.remote.ServiceInterceptor
+import com.example.aplicacionentrenos.data.sources.remote.retrofit.ServiceInterceptor
 import com.example.aplicacionentrenos.data.sources.remote.retrofit.AuthService
 import com.example.aplicacionentrenos.data.sources.remote.retrofit.EjercicioService
 import com.example.aplicacionentrenos.data.sources.remote.retrofit.EntrenadorService

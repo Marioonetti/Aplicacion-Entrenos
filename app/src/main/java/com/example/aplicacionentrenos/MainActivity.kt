@@ -3,15 +3,16 @@ package com.example.aplicacionentrenos
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.PersonAdd
-import androidx.compose.material.icons.filled.Train
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -21,7 +22,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.aplicacionentrenos.domain.model.bo.BottomBarItem
 import com.example.aplicacionentrenos.ui.MyEntrenosApp
-import com.example.aplicacionentrenos.ui.screens.ejercicios.EjerciciosScreen
+import com.example.aplicacionentrenos.ui.screens.ejercicios.general.EjerciciosScreen
 import com.example.aplicacionentrenos.ui.screens.entrenador.detalles.EntrenadorDetallesScreen
 import com.example.aplicacionentrenos.ui.screens.entrenador.general.EntrenadoresScreen
 import com.example.aplicacionentrenos.ui.screens.main.MainScreen
@@ -68,22 +69,22 @@ class MainActivity : ComponentActivity() {
                     BottomBarItem(
                         "Home",
                         NavigationConstants.PRINCIPAL_SCREEN_ROUTE,
-                        Icons.Default.Person
+                        Icons.Default.Description
                     ),
                     BottomBarItem(
                         "Entrenadores",
                         NavigationConstants.ENTRENADORES_ROUTE,
-                        Icons.Default.Person
+                        Icons.Default.DirectionsRun
                     ),
                     BottomBarItem(
                         "Ejercicios",
                         NavigationConstants.EJERCICIOS_ROUTE,
-                        Icons.Default.Train
+                        Icons.Default.FitnessCenter
                     ),
                     BottomBarItem(
                         "Perfil",
                         NavigationConstants.PERFIL_ROUTE,
-                        Icons.Default.PersonAdd
+                        Icons.Default.AccountCircle
                     )
                 ),
                 navController = navController,
@@ -93,8 +94,9 @@ class MainActivity : ComponentActivity() {
                 bottomBarState = bottomBarState
             )
         }, content = {
-            Navigation(navController)
-
+            Box(modifier = Modifier.padding(it)){
+                Navigation(navController)
+            }
         }
         )
 

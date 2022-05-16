@@ -1,4 +1,4 @@
-package com.example.aplicacionentrenos.data.sources.remote
+package com.example.aplicacionentrenos.data.sources.remote.retrofit
 
 import com.example.aplicacionentrenos.utils.UserCache
 import okhttp3.Credentials

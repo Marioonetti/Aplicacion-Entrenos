@@ -74,7 +74,7 @@ fun EntrenadoresScreen(
 }
 
 @Composable
-fun EntrenadorItem(
+private fun EntrenadorItem(
     entrenador: Entrenador,
     onEvent: (EntrenadoresContract.Eventos) -> Unit,
     ) {
