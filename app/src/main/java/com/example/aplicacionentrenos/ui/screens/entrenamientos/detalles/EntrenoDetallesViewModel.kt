@@ -1,61 +1,47 @@
-package com.example.aplicacionentrenos.ui.screens.login
+package com.example.aplicacionentrenos.ui.screens.entrenamientos.detalles
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.aplicacionentrenos.data.repository.AuthRepository
+import com.example.aplicacionentrenos.data.repository.EntrenosRepository
 import com.example.aplicacionentrenos.data.sources.remote.utils.NetworkResult
-import com.example.aplicacionentrenos.utils.NavigationConstants
+import com.example.aplicacionentrenos.ui.screens.entrenamientos.general.EntrenoContract
 import com.example.aplicacionentrenos.utils.UiEvents
-import com.example.aplicacionentrenos.utils.UserCache
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
-class LoginViewModel @Inject constructor(
-    private val authRepository: AuthRepository
-) : ViewModel() {
-
-    var hidden by mutableStateOf(true)
-
-    var username by mutableStateOf("")
-        private set
-
-    var password by mutableStateOf("")
-        private set
-
+class EntrenoDetallesViewModel @Inject constructor(
+    private val entrenosRepository: EntrenosRepository
+): ViewModel()
+{
     var loading by mutableStateOf(false)
         private set
+
+
+    private val _entreno: MutableStateFlow<EntrenoDetallesContract.EntrenoState> by lazy {
+        MutableStateFlow(EntrenoDetallesContract.EntrenoState())
+    }
+    val entreno: StateFlow<EntrenoDetallesContract.EntrenoState> = _entreno
 
     private val _uiEvent = Channel<UiEvents>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
 
-    fun handleEvent(event: LoginContract.Eventos) {
+    fun handleEvent(event : EntrenoDetallesContract.Eventos){
+        when(event){
+            is EntrenoDetallesContract.Eventos.IrDetalleEjercicio -> {
 
-        when (event) {
-            is LoginContract.Eventos.onUsernameChange -> {
-                username = event.username
             }
-
-            is LoginContract.Eventos.onPasswordChange -> {
-                password = event.passw
-            }
-
-            is LoginContract.Eventos.navToRegistro -> {
-                sendUiEvent(UiEvents.Navigate(NavigationConstants.REGISTRO_ROUTE))
-            }
-
-            is LoginContract.Eventos.doLogin -> {
+            is EntrenoDetallesContract.Eventos.GetEntrenoById -> {
                 viewModelScope.launch {
-                    authRepository.login(event.userDTO)
+                    entrenosRepository.getById(event.id)
                         .catch(action = { error ->
                             sendUiEvent(
                                 UiEvents.ShowSnackBar(error.message ?: "error")
@@ -64,11 +50,12 @@ class LoginViewModel @Inject constructor(
                         .collect { result ->
                             when (result) {
                                 is NetworkResult.Success -> {
-                                    UserCache.username = username
-                                    UserCache.password = password
-                                    UserCache.id = result.data?.id!!
                                     loading = false
-                                    sendUiEvent(UiEvents.Navigate(NavigationConstants.ENTRENAMIENTOS_SCREEN_ROUTE))
+                                    _entreno.update {
+                                        it.copy(
+                                            entreno = result.data
+                                        )
+                                    }
                                 }
                                 is NetworkResult.Error -> {
                                     sendUiEvent(
@@ -84,17 +71,17 @@ class LoginViewModel @Inject constructor(
                             }
                         }
                 }
-
             }
-
         }
-
     }
+
+
 
     private fun sendUiEvent(event: UiEvents) {
         viewModelScope.launch {
             _uiEvent.send(event)
         }
     }
+
 
 }

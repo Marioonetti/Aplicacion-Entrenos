@@ -12,18 +12,25 @@ abstract class BaseApiResponse {
         apiCall: suspend () -> Response<R>,
         transform: (R) -> T
     ): NetworkResult<T> {
+        var result : NetworkResult<T> = NetworkResult.Empty()
         try {
             val response = apiCall()
             if (response.isSuccessful) {
                 val body = response.body()
                 body?.let {
-                    return NetworkResult.Success(transform(body))
+                    result = NetworkResult.Success(transform(body))
                 }
             }
-            return error("${response.code()} ${response.message()}")
+            else{
+                response.errorBody()?.let { errorBody ->
+                    val apiError : ApiError = Gson().fromJson(errorBody.string(), ApiError::class.java)
+                    result = NetworkResult.Error(apiError.mensaje)
+                }
+            }
         } catch (e: Exception) {
-            return error(e.message ?: e.toString())
+            result = NetworkResult.Error(e.message ?: e.toString())
         }
+        return result
     }
 
     suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): NetworkResult<T> {
@@ -48,8 +55,6 @@ abstract class BaseApiResponse {
         return result
     }
 
-    private fun <T> error(errorMessage: String): NetworkResult<T> =
-        NetworkResult.Error("Api call failed: $errorMessage")
 
 
 }

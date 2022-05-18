@@ -22,12 +22,14 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.aplicacionentrenos.domain.model.bo.BottomBarItem
 import com.example.aplicacionentrenos.ui.MyEntrenosApp
+import com.example.aplicacionentrenos.ui.screens.ejercicios.detalles.EjercicioDetalleScreen
 import com.example.aplicacionentrenos.ui.screens.ejercicios.general.EjerciciosScreen
 import com.example.aplicacionentrenos.ui.screens.entrenador.detalles.EntrenadorDetallesScreen
 import com.example.aplicacionentrenos.ui.screens.entrenador.general.EntrenadoresScreen
+import com.example.aplicacionentrenos.ui.screens.entrenamientos.detalles.EntrenoDetallesScreen
 import com.example.aplicacionentrenos.ui.screens.main.MainScreen
 import com.example.aplicacionentrenos.ui.screens.perfil.PerfilScreen
-import com.example.aplicacionentrenos.ui.screens.principal.PrincipalScreen
+import com.example.aplicacionentrenos.ui.screens.entrenamientos.general.EntrenosScreen
 import com.example.aplicacionentrenos.ui.screens.registro.RegistroScreen
 import com.example.aplicacionentrenos.ui.screens.shared.BottomBarNavigation
 import com.example.aplicacionentrenos.utils.NavigationConstants
@@ -58,7 +60,7 @@ class MainActivity : ComponentActivity() {
             NavigationConstants.REGISTRO_ROUTE -> {
                 bottomBarState.value = false
             }
-            NavigationConstants.PRINCIPAL_SCREEN_ROUTE -> {
+            NavigationConstants.ENTRENAMIENTOS_SCREEN_ROUTE -> {
                 bottomBarState.value = true
             }
         }
@@ -67,8 +69,8 @@ class MainActivity : ComponentActivity() {
             BottomBarNavigation(
                 items = listOf(
                     BottomBarItem(
-                        "Home",
-                        NavigationConstants.PRINCIPAL_SCREEN_ROUTE,
+                        "Entrenamientos",
+                        NavigationConstants.ENTRENAMIENTOS_SCREEN_ROUTE,
                         Icons.Default.Description
                     ),
                     BottomBarItem(
@@ -117,10 +119,9 @@ fun Navigation(navController: NavHostController) {
                 onNavigate = { navController.navigate(it.route) }
             )
         }
-        composable(NavigationConstants.PRINCIPAL_SCREEN_ROUTE) {
-            PrincipalScreen(
-                onNavigate = { navController.navigate(it.route) },
-                navController
+        composable(NavigationConstants.ENTRENAMIENTOS_SCREEN_ROUTE) {
+            EntrenosScreen(
+                onNavigate = { navController.navigate(it.route) }
             )
         }
         composable(NavigationConstants.REGISTRO_ROUTE) {
@@ -158,6 +159,40 @@ fun Navigation(navController: NavHostController) {
                 it.arguments?.getInt(NavigationConstants.DETALLES_ENTRENADOR_ID_PARAM)
 
             EntrenadorDetallesScreen(
+                id
+            )
+        }
+        composable(
+            route = NavigationConstants.DETALLE_ENTRENOS_ROUTE,
+            arguments = listOf(
+                navArgument(
+                    NavigationConstants.DETALLE_ENTRENOS_PARAM
+                )
+                {
+                    type = NavType.IntType
+                })
+        ) {
+            val id =
+                it.arguments?.getInt(NavigationConstants.DETALLE_ENTRENOS_PARAM)
+
+            EntrenoDetallesScreen(
+                id
+            )
+        }
+        composable(
+            route = NavigationConstants.DETALLE_EJERCICIO_ROUTE,
+            arguments = listOf(
+                navArgument(
+                    NavigationConstants.DETALLE_EJERCICIO_PARAM
+                )
+                {
+                    type = NavType.IntType
+                })
+        ) {
+            val id =
+                it.arguments?.getInt(NavigationConstants.DETALLE_EJERCICIO_PARAM)
+
+            EjercicioDetalleScreen(
                 id
             )
         }

@@ -3,6 +3,7 @@ package com.example.aplicacionentrenos.ui.screens.shared
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -10,6 +11,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -44,18 +46,19 @@ fun BottomBarNavigation(
                         selectedContentColor = Color.Blue,
                         unselectedContentColor = Color.White,
                         icon = {
-                            Column {
+                            Column(verticalArrangement = Arrangement.SpaceEvenly,
+                            horizontalAlignment = Alignment.CenterHorizontally)
+                            {
                                 Icon(
                                     imageVector = item.icon,
                                     contentDescription = item.nombre,
                                 )
-                                if (selected){
-                                    Text(
-                                        text = item.nombre,
-                                        textAlign = TextAlign.Center,
-                                        fontSize = 10.sp
-                                    )
-                                }
+                                Text(
+                                    text = item.nombre,
+                                    textAlign = TextAlign.Center,
+                                    fontSize = 10.sp
+                                )
+
                             }
 
                         }

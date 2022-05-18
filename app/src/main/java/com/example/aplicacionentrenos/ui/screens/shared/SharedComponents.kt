@@ -3,10 +3,10 @@ package com.example.aplicacionentrenos.ui.screens.shared
 import android.os.Build.VERSION.SDK_INT
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -153,3 +153,5 @@ fun LoadProgressBar(activacion : Boolean){
     }
 
 }
+
+

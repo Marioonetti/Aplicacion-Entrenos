@@ -1,8 +1,8 @@
 package com.example.aplicacionentrenos.data.sources.remote.utils
 
 object RestConstants {
-//    const val BASE_URL = "http://192.168.1.133:8080/ServidorEntrenos-1.0-SNAPSHOT/api/"
-    const val BASE_URL = "http://informatica.iesquevedo.es:2326/EntrenosApp/api/"
+    const val BASE_URL = "http://192.168.1.133:8080/ServidorEntrenos-1.0-SNAPSHOT/api/"
+//    const val BASE_URL = "http://informatica.iesquevedo.es:2326/EntrenosApp/api/"
 
     const val LOGIN_PATH = "login/cliente"
     const val REGISTER_PATH = "registro/cliente"
@@ -19,6 +19,13 @@ object RestConstants {
     const val CLIENTE_PATH = "cliente"
     const val CLIENTE_ALTA_PATH = "/alta"
 
-    const val ENTRENAMIENTOS_PATH = "/entrenamientos"
+    const val ENTRENAMIENTOS_PATH = "entreno"
+    const val ENTRENAMIENTOS_DESC_PATH = "/desc"
+    const val ENTRENAMIENTOS_ASC_PATH = "/asc"
+    const val ENTRENAMIENTO_PATH_PARAM = "/{id}"
+
+
+    const val ID_ENTRENAMIENTO_PARAM = "id"
+    const val ID_CLIENTE_PARAM ="idCliente"
 
 }

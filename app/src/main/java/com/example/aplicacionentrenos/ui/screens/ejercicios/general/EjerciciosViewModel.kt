@@ -42,6 +42,12 @@ class EjerciciosViewModel @Inject constructor(
 
     fun handleEvent(event : EjerciciosContract.Eventos){
         when(event){
+
+            is EjerciciosContract.Eventos.IrDetallesEjercicio -> {
+                sendUiEvent(
+                    UiEvents.Navigate(NavigationConstants.NAVIGATE_TO_DETALLES_EJERCICIO + event.ejercicioId)
+                )
+            }
             is EjerciciosContract.Eventos.OnSearchChange -> {
                searchText = event.value
             }
