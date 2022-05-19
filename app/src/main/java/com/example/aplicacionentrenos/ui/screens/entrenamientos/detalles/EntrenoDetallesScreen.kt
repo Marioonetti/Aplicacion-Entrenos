@@ -1,6 +1,7 @@
 package com.example.aplicacionentrenos.ui.screens.entrenamientos.detalles
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -13,24 +14,22 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.toLowerCase
-import androidx.compose.ui.text.toUpperCase
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.aplicacionentrenos.domain.model.dto.EntrenoDTO
 import com.example.aplicacionentrenos.domain.model.dto.SerieDTO
-import com.example.aplicacionentrenos.ui.screens.entrenador.detalles.DetallesEntrenadorContract
 import com.example.aplicacionentrenos.ui.theme.primaryLightColor
 import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
-import java.util.*
 import kotlin.streams.toList
 
 
 @Composable
 fun EntrenoDetallesScreen(
-    id : Int?,
+    id: Int?,
     viewModel: EntrenoDetallesViewModel = hiltViewModel()
 ) {
     val entreno = viewModel.entreno.collectAsState().value.entreno
@@ -67,21 +66,25 @@ fun EntrenoDetallesScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         entreno?.let {
-            val listaEmpujes = entreno.series.stream().filter { it.enfoque.lowercase() == Constantes.EMPUJES }.toList()
-            val listaTracciones = entreno.series.stream().filter { it.enfoque.lowercase() == Constantes.TRACCIONES }.toList()
-            val listaPierna = entreno.series.stream().filter { it.enfoque.lowercase() == Constantes.PIERNA }.toList()
+            val listaEmpujes =
+                entreno.series.stream().filter { it.enfoque.lowercase() == Constantes.EMPUJES }
+                    .toList()
+            val listaTracciones =
+                entreno.series.stream().filter { it.enfoque.lowercase() == Constantes.TRACCIONES }
+                    .toList()
+            val listaPierna =
+                entreno.series.stream().filter { it.enfoque.lowercase() == Constantes.PIERNA }
+                    .toList()
 
 
             PintaEnfoque(nombre = Constantes.EMPUJES.uppercase())
-                PintaSeries(listaSerie = listaEmpujes)
+            PintaSeries(listaSerie = listaEmpujes)
 
             PintaEnfoque(nombre = Constantes.TRACCIONES.uppercase())
-                PintaSeries(listaSerie = listaTracciones)
+            PintaSeries(listaSerie = listaTracciones)
 
             PintaEnfoque(nombre = Constantes.PIERNA.uppercase())
-                PintaSeries(listaSerie = listaPierna)
-
-
+            PintaSeries(listaSerie = listaPierna)
 
 
         }
@@ -89,24 +92,37 @@ fun EntrenoDetallesScreen(
     }
 
 
-
 }
 
 @Composable
 private fun PintaSeries(
-    listaSerie : List<SerieDTO>
-){
+    listaSerie: List<SerieDTO>
+) {
 
-    if (listaSerie.isNotEmpty()){
+    if (listaSerie.isNotEmpty()) {
         listaSerie.forEach {
-            Column() {
+            Column {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    Text(text = it.ejercicio.nombre)
-                    Text(text = it.seriesRepeticiones)
-                    Text(text = "Rir ${it.rir.toString()}")
+                    Box(
+                        modifier = Modifier
+                            .clip(RectangleShape)
+                            .border(0.5.dp, MaterialTheme.colors.onSurface.copy(alpha = 0.5f))
+                    ) {
+                        Text(text = it.ejercicio.nombre, style = MaterialTheme.typography.h6)
+                    }
+                    Box(
+                        modifier = Modifier
+                            .clip(RectangleShape)
+                            .border(0.5.dp, MaterialTheme.colors.onSurface.copy(alpha = 0.5f))
+
+                    ) {
+                        Text(text = it.seriesRepeticiones, style = MaterialTheme.typography.h6)
+                        Text(text = "Rir ${it.rir}", style = MaterialTheme.typography.h6)
+                    }
+
                 }
             }
         }
@@ -116,15 +132,16 @@ private fun PintaSeries(
 
 @Composable
 private fun PintaEnfoque(
-   nombre:String
-){
+    nombre: String
+) {
 
-    Box(modifier = Modifier
-        .height(60.dp)
-        .fillMaxWidth()
-        .background(primaryLightColor)
+    Box(
+        modifier = Modifier
+            .height(50.dp)
+            .fillMaxWidth()
+            .background(primaryLightColor)
     ) {
-        Text(text = nombre, style = MaterialTheme.typography.h3)
+        Text(text = nombre, style = MaterialTheme.typography.h4)
     }
 
 

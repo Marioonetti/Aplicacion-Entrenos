@@ -19,4 +19,7 @@ interface EntrenadorService {
 
     @PUT(RestConstants.CLIENTE_PATH+RestConstants.CLIENTE_ALTA_PATH)
     suspend fun altaEntrenador(@Body clienteDTO: ClienteDTO) : Response<ClienteDTO>
+
+    @PUT(RestConstants.CLIENTE_PATH+RestConstants.CLIENTE_ALTA_PATH)
+    suspend fun bajaEntrenador(@Body clienteDTO: ClienteDTO) : Response<ClienteDTO>
 }

@@ -95,7 +95,7 @@ fun EjercicioItem(
         elevation = 5.dp
     ) {
         Column(modifier = Modifier.background(color = GrisFondo)) {
-            ImagenHorizontal(ejercicio.img)
+            ImagenHorizontal(ejercicio.img, 200)
             OverviewEjercicio(ejercicio)
         }
 

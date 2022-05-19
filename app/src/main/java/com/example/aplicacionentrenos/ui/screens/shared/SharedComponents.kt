@@ -70,7 +70,7 @@ fun Imagen(ruta: String) {
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun ImagenHorizontal(ruta: String) {
+fun ImagenHorizontal(ruta: String, alto : Int) {
 
     Box {
 
@@ -98,7 +98,7 @@ fun ImagenHorizontal(ruta: String) {
         Image(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp),
+                .height(alto.dp),
             painter = painter,
             contentDescription = "Imagen",
             contentScale = ContentScale.Crop,

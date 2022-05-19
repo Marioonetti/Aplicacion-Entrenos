@@ -135,10 +135,7 @@ fun Navigation(navController: NavHostController) {
             )
         }
         composable(NavigationConstants.PERFIL_ROUTE) {
-            PerfilScreen(
-                onNavigate = { navController.navigate(it.route) },
-                navController
-            )
+            PerfilScreen()
         }
         composable(NavigationConstants.EJERCICIOS_ROUTE) {
             EjerciciosScreen(

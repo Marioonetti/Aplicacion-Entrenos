@@ -1,10 +1,6 @@
 package com.example.aplicacionentrenos.data.sources.remote.di
 
-import com.example.aplicacionentrenos.data.sources.remote.retrofit.ServiceInterceptor
-import com.example.aplicacionentrenos.data.sources.remote.retrofit.AuthService
-import com.example.aplicacionentrenos.data.sources.remote.retrofit.EjercicioService
-import com.example.aplicacionentrenos.data.sources.remote.retrofit.EntrenadorService
-import com.example.aplicacionentrenos.data.sources.remote.retrofit.EntrenosService
+import com.example.aplicacionentrenos.data.sources.remote.retrofit.*
 import com.example.aplicacionentrenos.data.sources.remote.utils.RestConstants
 import dagger.Module
 import dagger.Provides
@@ -77,6 +73,11 @@ object NetworkModule {
     @Provides
     fun provideEntrenosService(retrofit: Retrofit): EntrenosService =
         retrofit.create(EntrenosService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideClienteService(retrofit: Retrofit): ClienteService =
+        retrofit.create(ClienteService::class.java)
 
 
 }
