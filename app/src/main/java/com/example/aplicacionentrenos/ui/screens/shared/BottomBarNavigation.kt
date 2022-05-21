@@ -20,6 +20,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.aplicacionentrenos.domain.model.bo.BottomBarItem
 import com.example.aplicacionentrenos.ui.theme.GrisFondo
+import com.example.aplicacionentrenos.utils.UserCache
 
 @Composable
 fun BottomBarNavigation(
@@ -42,7 +43,14 @@ fun BottomBarNavigation(
                     val selected = item.ruta == backStackEntry.value?.destination?.route
                     BottomNavigationItem(
                         selected = selected,
-                        onClick = { onItemClick(item) },
+                        onClick = {
+                            if (item.nombre == "Logout"){
+                                UserCache.username =""
+                                UserCache.token = ""
+                                UserCache.password = ""
+                                UserCache.id = null
+                            }
+                            onItemClick(item) },
                         selectedContentColor = Color.Blue,
                         unselectedContentColor = Color.White,
                         icon = {

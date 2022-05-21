@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.aplicacionentrenos.domain.model.dto.ClienteDTO
-import com.example.aplicacionentrenos.ui.screens.shared.ImagenFull
+import com.example.aplicacionentrenos.ui.screens.shared.ImagenCompleta
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
 import com.example.aplicacionentrenos.utils.UiEvents
 import com.example.aplicacionentrenos.utils.UserCache
@@ -64,7 +64,7 @@ fun EntrenadorDetallesScreen(
             verticalArrangement = Arrangement.Top
         ) {
             entrenador?.let {
-                ImagenFull(ruta = it.imagen)
+                ImagenCompleta(ruta = it.imagen)
 
                 Column(
                     modifier = Modifier.height(150.dp),

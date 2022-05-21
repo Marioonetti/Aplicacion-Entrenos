@@ -69,24 +69,30 @@ class MainActivity : ComponentActivity() {
             BottomBarNavigation(
                 items = listOf(
                     BottomBarItem(
-                        "Entrenamientos",
-                        NavigationConstants.ENTRENAMIENTOS_SCREEN_ROUTE,
-                        Icons.Default.Description
+                        "Ejercicios",
+                        NavigationConstants.EJERCICIOS_ROUTE,
+                        Icons.Default.FitnessCenter
                     ),
+
                     BottomBarItem(
                         "Entrenadores",
                         NavigationConstants.ENTRENADORES_ROUTE,
                         Icons.Default.DirectionsRun
                     ),
                     BottomBarItem(
-                        "Ejercicios",
-                        NavigationConstants.EJERCICIOS_ROUTE,
-                        Icons.Default.FitnessCenter
+                        "Entrenamientos",
+                        NavigationConstants.ENTRENAMIENTOS_SCREEN_ROUTE,
+                        Icons.Default.Description
                     ),
                     BottomBarItem(
                         "Perfil",
                         NavigationConstants.PERFIL_ROUTE,
                         Icons.Default.AccountCircle
+                    ),
+                    BottomBarItem(
+                        "Logout",
+                        NavigationConstants.MAIN_ROUTE,
+                        Icons.Default.Logout
                     )
                 ),
                 navController = navController,

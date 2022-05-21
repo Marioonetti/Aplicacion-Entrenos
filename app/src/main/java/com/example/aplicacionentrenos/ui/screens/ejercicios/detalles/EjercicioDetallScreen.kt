@@ -1,6 +1,5 @@
 package com.example.aplicacionentrenos.ui.screens.ejercicios.detalles
 
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -17,8 +16,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.aplicacionentrenos.domain.model.dto.EjercicioDTO
-import com.example.aplicacionentrenos.ui.screens.entrenamientos.detalles.EntrenoDetallesContract
-import com.example.aplicacionentrenos.ui.screens.shared.ImagenHorizontal
+import com.example.aplicacionentrenos.ui.screens.shared.GifImagenAjustadoCaja
+import com.example.aplicacionentrenos.ui.screens.shared.ImagenHorizontalPeque
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
@@ -77,7 +76,7 @@ private fun EjercicioOverView(
     ) {
 
         Text(text = ejercicio.nombre, style = MaterialTheme.typography.h4)
-        ImagenHorizontal(ruta = ejercicio.img, alto = 300)
+        GifImagenAjustadoCaja(ruta = ejercicio.img, alto = 300)
         EjercicioElements(ejercicio = ejercicio)
 
     }
@@ -91,9 +90,10 @@ private fun EjercicioElements(
 
     Column() {
 
-        Row(
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
+        Column(
+            modifier = Modifier.height(150.dp),
+            verticalArrangement = Arrangement.SpaceEvenly,
+
         ) {
             Text(text = "Intensidad: ${ejercicio.intensidad}")
             Text(text = "Musculo Enfocado: ${ejercicio.grupoMuscular}")
@@ -101,7 +101,7 @@ private fun EjercicioElements(
         Box(modifier = Modifier
             .height(250.dp)
             .width(300.dp)
-            .padding(8.dp)
+            .padding(4.dp)
         ){
             Text(
                 text = ejercicio.descripcion,

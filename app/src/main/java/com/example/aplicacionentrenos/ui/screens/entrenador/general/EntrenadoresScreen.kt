@@ -15,10 +15,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.aplicacionentrenos.domain.model.bo.Entrenador
-import com.example.aplicacionentrenos.ui.screens.shared.Imagen
+import com.example.aplicacionentrenos.ui.screens.shared.ImagenPreview
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
 import com.example.aplicacionentrenos.ui.theme.GrisFondo
-import com.example.aplicacionentrenos.ui.theme.primaryDarkColor
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
 
@@ -28,10 +27,7 @@ fun EntrenadoresScreen(
     viewModel: EntrenadoresViewModel = hiltViewModel()
 ) {
 
-    val listaEntrenadores = viewModel.entrenadores.
-    collectAsState().
-    value.
-    entrenadores
+    val listaEntrenadores = viewModel.entrenadores.collectAsState().value.entrenadores
 
     val scaffoldState = rememberScaffoldState()
     LaunchedEffect(key1 = true) {
@@ -55,10 +51,9 @@ fun EntrenadoresScreen(
         scaffoldState = scaffoldState,
         modifier = Modifier.fillMaxSize()
     ) {
-        Box(modifier =Modifier.padding(it)){
-            LazyColumn{
-                items(listaEntrenadores){
-                        entrenador ->
+        Box(modifier = Modifier.padding(it)) {
+            LazyColumn {
+                items(listaEntrenadores) { entrenador ->
                     EntrenadorItem(entrenador, viewModel::handleEvent)
                 }
 
@@ -69,15 +64,13 @@ fun EntrenadoresScreen(
     }
 
 
-
-
 }
 
 @Composable
 private fun EntrenadorItem(
     entrenador: Entrenador,
     onEvent: (EntrenadoresContract.Eventos) -> Unit,
-    ) {
+) {
     Card(
         modifier = Modifier
             .padding(5.dp)
@@ -88,7 +81,7 @@ private fun EntrenadorItem(
         elevation = 5.dp
     ) {
         Row(modifier = Modifier.background(color = GrisFondo)) {
-            Imagen(entrenador.imagen)
+            ImagenPreview(entrenador.imagen)
             OverView(entrenador)
         }
 
@@ -101,10 +94,11 @@ private fun EntrenadorItem(
 @Composable
 private fun OverView(entrenador: Entrenador) {
 
-    Column( modifier = Modifier
-        .fillMaxHeight(),
+    Column(
+        modifier = Modifier
+            .fillMaxHeight(),
         verticalArrangement = Arrangement.SpaceEvenly
-    ){
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -136,7 +130,6 @@ private fun OverView(entrenador: Entrenador) {
 
 
     }
-    
 
 
 }

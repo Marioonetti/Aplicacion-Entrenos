@@ -24,7 +24,7 @@ import coil.size.Scale
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun Imagen(ruta: String) {
+fun ImagenPreview(ruta: String) {
 
     Box {
 
@@ -70,7 +70,7 @@ fun Imagen(ruta: String) {
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun ImagenHorizontal(ruta: String, alto : Int) {
+fun ImagenHorizontalPeque(ruta: String, alto : Int) {
 
     Box {
 
@@ -114,10 +114,55 @@ fun ImagenHorizontal(ruta: String, alto : Int) {
 }
 
 
+@OptIn(ExperimentalCoilApi::class)
+@Composable
+fun GifImagenAjustadoCaja(ruta: String, alto : Int) {
+
+    Box {
+
+        val context = LocalContext.current
+        val imgLoader = ImageLoader.invoke(context).newBuilder()
+            .componentRegistry {
+                if (SDK_INT >= 28) {
+                    add(ImageDecoderDecoder(context))
+                } else {
+                    add(GifDecoder())
+                }
+            }.build()
+
+        val painter = rememberImagePainter(
+            imageLoader = imgLoader ,
+            data = ruta,
+            builder = {
+                size(OriginalSize)
+                scale(Scale.FIT)
+                crossfade(true)
+            })
+//        Estado de la imagen
+        val painterState = painter.state
+
+        Image(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(alto.dp),
+            painter = painter,
+            contentDescription = "Imagen",
+            contentScale = ContentScale.Fit,
+        )
+//        Si su estado es cargando, ponemos la ciruclar progress bar
+        if (painterState is ImagePainter.State.Loading) {
+            CircularProgressIndicator()
+        }
+
+    }
+
+
+}
+
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun ImagenFull(ruta: String) {
+fun ImagenCompleta(ruta: String) {
 
     Box {
         val painter = rememberImagePainter(

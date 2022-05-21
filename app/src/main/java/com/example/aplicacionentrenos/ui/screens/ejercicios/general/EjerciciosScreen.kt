@@ -15,13 +15,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.aplicacionentrenos.domain.model.dto.EjercicioDTO
-import com.example.aplicacionentrenos.ui.screens.shared.Imagen
-import com.example.aplicacionentrenos.ui.screens.shared.ImagenHorizontal
+import com.example.aplicacionentrenos.ui.screens.shared.ImagenHorizontalPeque
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
 import com.example.aplicacionentrenos.ui.theme.GrisFondo
 import com.example.aplicacionentrenos.ui.theme.amarilloApagado
@@ -95,7 +93,7 @@ fun EjercicioItem(
         elevation = 5.dp
     ) {
         Column(modifier = Modifier.background(color = GrisFondo)) {
-            ImagenHorizontal(ejercicio.img, 200)
+            ImagenHorizontalPeque(ejercicio.img, 200)
             OverviewEjercicio(ejercicio)
         }
 
