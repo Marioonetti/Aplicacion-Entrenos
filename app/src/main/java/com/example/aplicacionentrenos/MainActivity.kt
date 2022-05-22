@@ -141,7 +141,9 @@ fun Navigation(navController: NavHostController) {
             )
         }
         composable(NavigationConstants.PERFIL_ROUTE) {
-            PerfilScreen()
+            PerfilScreen (
+                onNavigate = { navController.navigate(it.route) }
+            )
         }
         composable(NavigationConstants.EJERCICIOS_ROUTE) {
             EjerciciosScreen(
@@ -162,6 +164,7 @@ fun Navigation(navController: NavHostController) {
                 it.arguments?.getInt(NavigationConstants.DETALLES_ENTRENADOR_ID_PARAM)
 
             EntrenadorDetallesScreen(
+                onPopBackStack = {navController.popBackStack()},
                 id
             )
         }
@@ -174,11 +177,12 @@ fun Navigation(navController: NavHostController) {
                 {
                     type = NavType.IntType
                 })
-        ) {
+        ) {navStack ->
             val id =
-                it.arguments?.getInt(NavigationConstants.DETALLE_ENTRENOS_PARAM)
+                navStack.arguments?.getInt(NavigationConstants.DETALLE_ENTRENOS_PARAM)
 
             EntrenoDetallesScreen(
+                onNavigate = { navController.navigate(it.route) },
                 id
             )
         }
@@ -196,6 +200,7 @@ fun Navigation(navController: NavHostController) {
                 it.arguments?.getInt(NavigationConstants.DETALLE_EJERCICIO_PARAM)
 
             EjercicioDetalleScreen(
+                onPopBackStack = {navController.popBackStack()},
                 id
             )
         }

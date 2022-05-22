@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.aplicacionentrenos.data.repository.EntrenosRepository
 import com.example.aplicacionentrenos.data.sources.remote.utils.NetworkResult
 import com.example.aplicacionentrenos.ui.screens.entrenamientos.general.EntrenoContract
+import com.example.aplicacionentrenos.utils.NavigationConstants
 import com.example.aplicacionentrenos.utils.UiEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -37,7 +38,7 @@ class EntrenoDetallesViewModel @Inject constructor(
     fun handleEvent(event : EntrenoDetallesContract.Eventos){
         when(event){
             is EntrenoDetallesContract.Eventos.IrDetalleEjercicio -> {
-
+                sendUiEvent(UiEvents.Navigate(NavigationConstants.NAVIGATE_TO_DETALLES_EJERCICIO + event.ejercicioId))
             }
             is EntrenoDetallesContract.Eventos.GetEntrenoById -> {
                 viewModelScope.launch {

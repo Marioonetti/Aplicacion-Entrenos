@@ -10,7 +10,7 @@ import retrofit2.http.Path
 interface ClienteService {
 
 
-    @GET(RestConstants.ENTRENADORES_PATH)
+    @GET(RestConstants.CLIENTE_PATH + RestConstants.CLIENTE_PATH_PARAM)
     suspend fun getInfoById(@Path("id") id : Int) : Response<ClienteDTO>
 
 }

@@ -36,6 +36,9 @@ class EjercicioDetallesViewModel @Inject constructor(
     fun handleEvent(event : EjercicioDetallesContract.Eventos){
 
         when(event){
+            is EjercicioDetallesContract.Eventos.Volver -> {
+                sendUiEvent(UiEvents.PopBackStack)
+            }
             is EjercicioDetallesContract.Eventos.GetEjercicioById -> {
 
                 viewModelScope.launch {

@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplicacionentrenos.data.repository.EntrenadorRepository
 import com.example.aplicacionentrenos.data.sources.remote.utils.NetworkResult
-import com.example.aplicacionentrenos.ui.screens.entrenador.general.EntrenadoresContract
 import com.example.aplicacionentrenos.utils.UiEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -34,9 +33,13 @@ class DetallesEntrenadorViewModel @Inject constructor(
     val uiState: StateFlow<DetallesEntrenadorContract.EntrenadorState> = _uiState
 
 
-    fun handleEvent(event : DetallesEntrenadorContract.Eventos){
+    fun handleEvent(event: DetallesEntrenadorContract.Eventos) {
 
-        when(event){
+        when (event) {
+
+            is DetallesEntrenadorContract.Eventos.Volver -> {
+                sendUiEvent(UiEvents.PopBackStack)
+            }
             is DetallesEntrenadorContract.Eventos.PedirEntrenador -> {
 
                 viewModelScope.launch {
@@ -85,7 +88,7 @@ class DetallesEntrenadorViewModel @Inject constructor(
                             when (result) {
                                 is NetworkResult.Success -> {
                                     loading = false
-                                   sendUiEvent(UiEvents.ShowSnackBar("Entrenador dado de alta correctamente"))
+                                    sendUiEvent(UiEvents.ShowSnackBar("Entrenador dado de alta correctamente"))
 
                                 }
                                 is NetworkResult.Error -> {
@@ -104,7 +107,6 @@ class DetallesEntrenadorViewModel @Inject constructor(
                 }
             }
         }
-
 
 
     }

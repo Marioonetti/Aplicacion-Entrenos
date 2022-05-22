@@ -10,7 +10,7 @@ interface PerfilContract {
     sealed class Eventos{
         data class GetClienteByID(val id: Int) : Eventos()
         data class GetEntrenadorById(val idEntrenador : Int) : Eventos()
-        data class BajaEntrenador(val idCliente : Int, val idEntrenador : Int) : Eventos()
+        data class BajaEntrenador(val cliente: ClienteDTO) : Eventos()
 
     }
 

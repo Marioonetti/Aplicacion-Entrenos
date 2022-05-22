@@ -87,37 +87,43 @@ class EjerciciosViewModel @Inject constructor(
 
             }
             is EjerciciosContract.Eventos.BuscarEjercicios -> {
-                viewModelScope.launch {
-                    ejerciciosRepository.getByName(event.nombre)
-                        .catch(action = { error ->
-                            sendUiEvent(
-                                UiEvents.ShowSnackBar(error.message ?: "error")
-                            )
-                        })
-                        .collect { result ->
-                            when (result) {
-                                is NetworkResult.Success -> {
-                                    loading = false
-                                    _ejercicios.update {
-                                        it.copy(
-                                            ejercicios = result.data ?: emptyList()
+                if (event.nombre.isNullOrBlank()){
+                    handleEvent(EjerciciosContract.Eventos.GetAll)
+                }
+                else{
+                    viewModelScope.launch {
+                        ejerciciosRepository.getByName(event.nombre)
+                            .catch(action = { error ->
+                                sendUiEvent(
+                                    UiEvents.ShowSnackBar(error.message ?: "error")
+                                )
+                            })
+                            .collect { result ->
+                                when (result) {
+                                    is NetworkResult.Success -> {
+                                        loading = false
+                                        _ejercicios.update {
+                                            it.copy(
+                                                ejercicios = result.data ?: emptyList()
+                                            )
+                                        }
+                                    }
+                                    is NetworkResult.Error -> {
+                                        sendUiEvent(
+                                            UiEvents.ShowSnackBar(
+                                                result.message ?: "Fallo"
+                                            )
                                         )
+                                        loading = false
+                                    }
+                                    is NetworkResult.Loading -> {
+                                        loading = true
                                     }
                                 }
-                                is NetworkResult.Error -> {
-                                    sendUiEvent(
-                                        UiEvents.ShowSnackBar(
-                                            result.message ?: "Fallo"
-                                        )
-                                    )
-                                    loading = false
-                                }
-                                is NetworkResult.Loading -> {
-                                    loading = true
-                                }
                             }
-                        }
+                    }
                 }
+
             }
         }
     }

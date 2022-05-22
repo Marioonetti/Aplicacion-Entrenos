@@ -3,10 +3,9 @@ package com.example.aplicacionentrenos.ui.screens.ejercicios.detalles
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -17,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.aplicacionentrenos.domain.model.dto.EjercicioDTO
 import com.example.aplicacionentrenos.ui.screens.shared.GifImagenAjustadoCaja
-import com.example.aplicacionentrenos.ui.screens.shared.ImagenHorizontalPeque
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
@@ -25,6 +23,7 @@ import kotlinx.coroutines.flow.collect
 
 @Composable
 fun EjercicioDetalleScreen(
+    onPopBackStack: () -> Unit,
     id : Int?,
     viewModel: EjercicioDetallesViewModel = hiltViewModel()
 ) {
@@ -43,6 +42,7 @@ fun EjercicioDetalleScreen(
                         message = event.mensaje
                     )
                 }
+                is UiEvents.PopBackStack -> onPopBackStack()
                 else -> Unit
             }
         }
@@ -54,7 +54,7 @@ fun EjercicioDetalleScreen(
 
     Column {
         ejercicio?.let {
-            EjercicioOverView(ejercicio = ejercicio)
+            EjercicioOverView(ejercicio = ejercicio, viewModel)
         }
 
         LoadProgressBar(activacion = viewModel.loading)
@@ -65,7 +65,8 @@ fun EjercicioDetalleScreen(
 
 @Composable
 private fun EjercicioOverView(
-    ejercicio: EjercicioDTO
+    ejercicio: EjercicioDTO,
+    viewModel: EjercicioDetallesViewModel
 ){
 
     Column(modifier = Modifier
@@ -75,7 +76,22 @@ private fun EjercicioOverView(
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
 
-        Text(text = ejercicio.nombre, style = MaterialTheme.typography.h4)
+        Row{
+
+                IconButton(onClick = {
+                    viewModel.handleEvent(EjercicioDetallesContract.Eventos.Volver)
+                }) {
+                    Icon(imageVector = Icons.Default.ArrowBack ,
+                        contentDescription = "Volver")
+                }
+
+                Text(
+                    text = ejercicio.nombre,
+                    style = MaterialTheme.typography.h4)
+
+
+        }
+
         GifImagenAjustadoCaja(ruta = ejercicio.img, alto = 300)
         EjercicioElements(ejercicio = ejercicio)
 

@@ -39,5 +39,13 @@ class EntrenadorRepository @Inject constructor(
     }
 
 
+    fun bajaEnrenador(clienteDTO: ClienteDTO): Flow<NetworkResult<ClienteDTO>> {
+        return flow {
+            emit(NetworkResult.Loading())
+            emit(entrenadorDataSource.bajaEntrenador(clienteDTO))
+        }.flowOn(Dispatchers.IO)
+    }
+
+
 
 }

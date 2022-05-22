@@ -24,4 +24,8 @@ class EntrenadorDataSource @Inject constructor(
         apiCall = { entrenadorService.altaEntrenador(clienteDto) }
     )
 
+    suspend fun bajaEntrenador(clienteDto : ClienteDTO) = safeApiCall(
+        apiCall = { entrenadorService.bajaEntrenador(clienteDto) }
+    )
+
 }

@@ -146,7 +146,8 @@ private fun SearchTextField(viewModel: EjerciciosViewModel) {
             shape = RoundedCornerShape(12.dp),
             trailingIcon = {
                 IconButton(
-                    onClick = { viewModel.handleEvent(EjerciciosContract.Eventos.BuscarEjercicios(viewModel.searchText)) }
+                    onClick = {
+                        viewModel.handleEvent(EjerciciosContract.Eventos.BuscarEjercicios(viewModel.searchText.trim())) }
                 ) {
                     Icon(
                         imageVector = Icons.Default.Search,

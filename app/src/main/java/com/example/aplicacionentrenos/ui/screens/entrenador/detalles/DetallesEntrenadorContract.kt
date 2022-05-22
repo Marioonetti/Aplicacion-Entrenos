@@ -8,6 +8,7 @@ interface DetallesEntrenadorContract {
     sealed class Eventos{
         data class AltaEntrenador(val clienteDTO: ClienteDTO) : Eventos()
         data class PedirEntrenador(val id: Int) : Eventos()
+        object Volver : Eventos()
     }
 
     data class EntrenadorState(
