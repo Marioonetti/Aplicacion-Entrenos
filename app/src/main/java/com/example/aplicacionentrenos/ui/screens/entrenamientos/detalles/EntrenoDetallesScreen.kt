@@ -153,7 +153,7 @@ private fun PintaEnfoque(
             .background(primaryLightColor),
         horizontalArrangement = Arrangement.Center
     ) {
-        Text(text = nombre, style = MaterialTheme.typography.h4)
+        Text(text = nombre, style = MaterialTheme.typography.h1)
     }
 
 

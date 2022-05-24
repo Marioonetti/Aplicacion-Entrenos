@@ -8,18 +8,14 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.aplicacionentrenos.R
 import com.example.aplicacionentrenos.domain.model.dto.UserDTO
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
@@ -49,17 +45,17 @@ fun LoginBox(
     Scaffold(
         scaffoldState = scaffoldState,
         modifier = Modifier.fillMaxSize()
-    ) {
+    ) {}
 
-    }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
             .padding(top = 5.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
+
+
         Column(
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
@@ -92,7 +88,7 @@ fun LoginBox(
                     PasswordVisualTransformation() else VisualTransformation.None,
                 trailingIcon = {
                     IconButton(onClick = { viewModel.hidden = !viewModel.hidden }) {
-                        val vector : ImageVector =
+                        val vector: ImageVector =
                             if (viewModel.hidden) Icons.Default.VisibilityOff
                             else Icons.Default.Visibility
                         Icon(imageVector = vector, contentDescription = "Ojo")
@@ -113,15 +109,17 @@ fun LoginBox(
             }
 
             Button(onClick = {
-                viewModel.handleEvent(LoginContract.Eventos.doLogin(
-                    UserDTO(viewModel.username, viewModel.password)
-                ))
-                }) {
+                viewModel.handleEvent(
+                    LoginContract.Eventos.doLogin(
+                        UserDTO(viewModel.username, viewModel.password)
+                    )
+                )
+            }) {
                 Text(text = "Login")
             }
         }
 
-        if(viewModel.loading){
+        if (viewModel.loading) {
             CircularProgressIndicator()
         }
 

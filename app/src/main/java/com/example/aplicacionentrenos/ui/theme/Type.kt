@@ -2,16 +2,27 @@ package com.example.aplicacionentrenos.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.aplicacionentrenos.R
 
 // Set of Material typography styles to start with
+val BebasNeue = FontFamily(
+    Font(R.font.bebasneue_regular)
+)
+
 val Typography = Typography(
     body1 = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
+    ),
+    h1 = TextStyle(
+        fontFamily = BebasNeue,
+        fontWeight = FontWeight.Normal,
+        fontSize = 32.sp
     )
     /* Other default text styles to override
     button = TextStyle(
@@ -26,3 +37,4 @@ val Typography = Typography(
     )
     */
 )
+
