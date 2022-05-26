@@ -18,6 +18,9 @@ import com.example.aplicacionentrenos.domain.model.bo.Entrenador
 import com.example.aplicacionentrenos.ui.screens.shared.ImagenPreview
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
 import com.example.aplicacionentrenos.ui.theme.GrisFondo
+import com.example.aplicacionentrenos.ui.theme.azulCeleste
+import com.example.aplicacionentrenos.ui.theme.primaryColor
+import com.example.aplicacionentrenos.ui.theme.primaryLightColor
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
 
@@ -80,7 +83,7 @@ private fun EntrenadorItem(
             },
         elevation = 5.dp
     ) {
-        Row(modifier = Modifier.background(color = GrisFondo)) {
+        Row(modifier = Modifier.background(color = azulCeleste)) {
             ImagenPreview(entrenador.imagen)
             OverView(entrenador)
         }

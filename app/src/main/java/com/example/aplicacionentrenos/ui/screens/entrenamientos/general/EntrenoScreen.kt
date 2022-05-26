@@ -1,5 +1,6 @@
 package com.example.aplicacionentrenos.ui.screens.entrenamientos.general
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,6 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.aplicacionentrenos.domain.model.bo.Entreno
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
+import com.example.aplicacionentrenos.ui.theme.blancoFloral
 import com.example.aplicacionentrenos.utils.UiEvents
 import com.example.aplicacionentrenos.utils.UserCache
 import kotlinx.coroutines.flow.collect
@@ -82,8 +84,10 @@ private fun EntrenoItem(
             .height(250.dp)
             .clickable {
                 handleEvent(EntrenoContract.Eventos.IrDetallesEntrenamiento(entreno.id))
-            },
-        elevation = 5.dp
+            }
+        ,
+        elevation = 5.dp,
+        backgroundColor = blancoFloral
     ) {
         EntrenoElements(entreno = entreno)
     }

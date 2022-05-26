@@ -116,22 +116,10 @@ private fun PintaSeries(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .clip(RectangleShape)
-                            .border(0.5.dp, MaterialTheme.colors.onSurface.copy(alpha = 0.5f))
 
-                    ) {
-                        Text(text = it.seriesRepeticiones, style = MaterialTheme.typography.h6)
-                    }
-                    Box(
-                        modifier = Modifier
-                            .clip(RectangleShape)
-                            .border(0.5.dp, MaterialTheme.colors.onSurface.copy(alpha = 0.5f))
+                    Text(text = it.seriesRepeticiones, style = MaterialTheme.typography.h6)
+                    Text(text = "Rir ${it.rir}", style = MaterialTheme.typography.h6)
 
-                    ) {
-                        Text(text = "Rir ${it.rir}", style = MaterialTheme.typography.h6)
-                    }
                 }
 
             }

@@ -54,11 +54,11 @@ class EntrenamientosViewModel @Inject constructor(
                                 is NetworkResult.Success -> {
                                     loading = false
                                     _entrenos.update {
+
                                         it.copy(
-                                            entrenamientos = emptyList()
-                                        )
-                                        it.copy(
-                                            entrenamientos = result.data ?: emptyList()
+                                            entrenamientos =
+                                            result.data?.sortedByDescending {entreno ->  entreno.fecha }?.asReversed()
+                                                ?: emptyList()
                                         )
                                     }
                                 }
@@ -92,10 +92,7 @@ class EntrenamientosViewModel @Inject constructor(
                                     loading = false
                                     _entrenos.update {
                                         it.copy(
-                                            entrenamientos = emptyList()
-                                        )
-                                        it.copy(
-                                            entrenamientos = result.data ?: emptyList()
+                                            entrenamientos = result.data?.sortedByDescending {entreno ->  entreno.fecha } ?: emptyList()
                                         )
                                     }
                                 }

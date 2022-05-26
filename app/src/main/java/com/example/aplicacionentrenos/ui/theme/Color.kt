@@ -17,14 +17,6 @@ val secondaryTextColor2 = Color(0XFFffffff)
 val amarilloApagado = Color(0XFFd3b789)
 
 
-//Paleta 1
-val azulOscuro = Color(0XFF4A707A)
-val azulIntermedio = Color(0XFF7697A0)
-val azulClarito = Color(0XFF94B0B7)
-val grisOscuro = Color(0XFFC2C8C5)
-val grisClarito = Color(0XFFDDDDD4)
-
-
 
 //Colores App
 val error = Color(0XFFff0033)
@@ -36,7 +28,8 @@ val secondaryLightColor = Color(0XFFb6ffff)
 val secondaryDarkColor = Color(0XFF4ba3c7)
 val primaryTextColor = Color(0XFF000000)
 val secondaryTextColor = Color(0XFF000000)
-
+val azulCeleste = Color(0XFFF0FFFF)
+val blancoFloral = Color(0XFFFFFAF0)
 
 
 
