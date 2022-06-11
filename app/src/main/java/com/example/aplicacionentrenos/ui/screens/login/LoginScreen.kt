@@ -1,5 +1,7 @@
 package com.example.aplicacionentrenos.ui.screens.login
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -10,13 +12,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.aplicacionentrenos.R
 import com.example.aplicacionentrenos.domain.model.dto.UserDTO
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
 
@@ -48,19 +55,50 @@ fun LoginBox(
     ) {}
 
 
+        Column( modifier = Modifier
+            .fillMaxSize(),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally ) {
+            Box(modifier = Modifier.width(200.dp).height(170.dp).padding(top = 10.dp)){
+                LoadLogo()
+            }
+            Box(modifier = Modifier.width(300.dp).height(450.dp)){
+                BodyLogin(viewModel)
+            }
+
+    }
+
+
+}
+
+@Composable
+private fun LoadLogo(){
+    Row(
+        modifier = Modifier
+            .fillMaxSize()
+    )
+    {
+        Image(
+            painter =  painterResource(id = R.drawable.logo_gym),
+            contentDescription = Constantes.CONTENT_DESCRIPTION,
+            contentScale = ContentScale.Crop,
+        )
+    }
+
+}
+@Composable
+private fun BodyLogin(viewModel: LoginViewModel) {
     Column(
-        modifier = Modifier.fillMaxSize()
-            .padding(top = 5.dp),
+        modifier = Modifier
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
-
-
         Column(
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
             Text(
-                text = "Nombre de Usuario: ",
+                text = Constantes.NOMBRE_USUARIO,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
             OutlinedTextField(
@@ -74,7 +112,7 @@ fun LoginBox(
 
         Column {
             Text(
-                text = "Contraseña: ",
+                text = Constantes.CONTTA,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
             OutlinedTextField(
@@ -105,7 +143,7 @@ fun LoginBox(
             Button(onClick = {
                 viewModel.handleEvent(LoginContract.Eventos.navToRegistro)
             }) {
-                Text(text = "Registrarse")
+                Text(text = Constantes.REGISTRARSE)
             }
 
             Button(onClick = {
@@ -115,7 +153,7 @@ fun LoginBox(
                     )
                 )
             }) {
-                Text(text = "Login")
+                Text(text = Constantes.LOGINN)
             }
         }
 
@@ -124,6 +162,5 @@ fun LoginBox(
         }
 
     }
-
 
 }

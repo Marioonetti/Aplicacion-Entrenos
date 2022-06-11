@@ -6,22 +6,22 @@ import com.example.aplicacionentrenos.domain.datamappers.toEntreno
 import javax.inject.Inject
 
 class EntrenoDataSource @Inject constructor(
-    private  val entrenosService: EntrenosService
-) : BaseApiResponse(){
+    private val entrenosService: EntrenosService
+) : BaseApiResponse() {
 
-    suspend fun getAllDesc(id : Int) = safeApiCall(apiCall = {
-        entrenosService.getAllEntrenosDesc(id)},
-        transform = { list -> list.map { it.toEntreno() }})
+    suspend fun getAllDesc(id: Int) = safeApiCall(apiCall = {
+        entrenosService.getAllEntrenosDesc(id)
+    },
+        transform = { list -> list.map { it.toEntreno() } })
 
-    suspend fun getAllAsc(id : Int) = safeApiCall(apiCall = {
-        entrenosService.getAllEntrenosAsc(id)},
-        transform = { list -> list.map { it.toEntreno() }})
+    suspend fun getAllAsc(id: Int) = safeApiCall(apiCall = {
+        entrenosService.getAllEntrenosAsc(id)
+    },
+        transform = { list -> list.map { it.toEntreno() } })
 
-    suspend fun getById(id : Int) = safeApiCall(apiCall = {
-        entrenosService.getEntrenoById(id)})
-
-
-
+    suspend fun getById(id: Int) = safeApiCall(apiCall = {
+        entrenosService.getEntrenoById(id)
+    })
 
 
 }

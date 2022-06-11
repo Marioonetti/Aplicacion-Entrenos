@@ -17,10 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.aplicacionentrenos.domain.model.bo.Entrenador
 import com.example.aplicacionentrenos.ui.screens.shared.ImagenPreview
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
-import com.example.aplicacionentrenos.ui.theme.GrisFondo
 import com.example.aplicacionentrenos.ui.theme.azulCeleste
-import com.example.aplicacionentrenos.ui.theme.primaryColor
-import com.example.aplicacionentrenos.ui.theme.primaryLightColor
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
 

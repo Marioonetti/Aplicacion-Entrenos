@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplicacionentrenos.data.repository.AuthRepository
 import com.example.aplicacionentrenos.data.sources.remote.utils.NetworkResult
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.NavigationConstants
 import com.example.aplicacionentrenos.utils.UiEvents
 import com.example.aplicacionentrenos.utils.UserCache
@@ -54,18 +55,19 @@ class LoginViewModel @Inject constructor(
             }
 
             is LoginContract.Eventos.doLogin -> {
+                UserCache.username = username
+                UserCache.password = password
                 viewModelScope.launch {
                     authRepository.login(event.userDTO)
                         .catch(action = { error ->
                             sendUiEvent(
-                                UiEvents.ShowSnackBar(error.message ?: "error")
+                                UiEvents.ShowSnackBar(error.message ?: Constantes.ERROR)
                             )
                         })
                         .collect { result ->
                             when (result) {
                                 is NetworkResult.Success -> {
-                                    UserCache.username = username
-                                    UserCache.password = password
+
                                     UserCache.id = result.data?.id!!
                                     loading = false
                                     sendUiEvent(UiEvents.Navigate(NavigationConstants.ENTRENAMIENTOS_SCREEN_ROUTE))
@@ -73,9 +75,11 @@ class LoginViewModel @Inject constructor(
                                 is NetworkResult.Error -> {
                                     sendUiEvent(
                                         UiEvents.ShowSnackBar(
-                                            result.message ?: "Fallo"
+                                            result.message ?: Constantes.FALLO
                                         )
                                     )
+                                    UserCache.username = ""
+                                    UserCache.password = ""
                                     loading = false
                                 }
                                 is NetworkResult.Loading -> {

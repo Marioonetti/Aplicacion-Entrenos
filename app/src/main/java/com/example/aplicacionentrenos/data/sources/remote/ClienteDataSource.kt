@@ -8,7 +8,7 @@ class ClienteDataSource @Inject constructor(
     private val clienteService: ClienteService
 ) : BaseApiResponse() {
 
-    suspend fun getInfoById(id :Int) = safeApiCall(apiCall = {clienteService.getInfoById(id)})
+    suspend fun getInfoById(id: Int) = safeApiCall(apiCall = { clienteService.getInfoById(id) })
 
 
 }

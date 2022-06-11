@@ -1,21 +1,20 @@
 package com.example.aplicacionentrenos.ui.screens.entrenador.general
 
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplicacionentrenos.data.repository.EntrenadorRepository
 import com.example.aplicacionentrenos.data.sources.remote.utils.NetworkResult
-import com.example.aplicacionentrenos.domain.model.bo.Entrenador
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.NavigationConstants
 import com.example.aplicacionentrenos.utils.UiEvents
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @HiltViewModel
 class EntrenadoresViewModel @Inject constructor(
@@ -33,8 +32,8 @@ class EntrenadoresViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvents>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun handleEvent(event : EntrenadoresContract.Eventos){
-        when(event){
+    fun handleEvent(event: EntrenadoresContract.Eventos) {
+        when (event) {
             is EntrenadoresContract.Eventos.NavToInformacion -> {
                 sendUiEvent(
                     UiEvents.Navigate(NavigationConstants.NAVIGATE_TO_DETALLES_ENTRENADOR + event.id)
@@ -46,7 +45,7 @@ class EntrenadoresViewModel @Inject constructor(
                     entrenadorRepository.getAll()
                         .catch(action = { error ->
                             sendUiEvent(
-                                UiEvents.ShowSnackBar(error.message ?: "error")
+                                UiEvents.ShowSnackBar(error.message ?: Constantes.ERROR)
                             )
                         })
                         .collect { result ->
@@ -62,7 +61,7 @@ class EntrenadoresViewModel @Inject constructor(
                                 is NetworkResult.Error -> {
                                     sendUiEvent(
                                         UiEvents.ShowSnackBar(
-                                            result.message ?: "Fallo"
+                                            result.message ?: Constantes.FALLO
                                         )
                                     )
                                     loading = false
@@ -75,11 +74,9 @@ class EntrenadoresViewModel @Inject constructor(
                 }
 
 
-
             }
         }
     }
-
 
 
     private fun sendUiEvent(event: UiEvents) {

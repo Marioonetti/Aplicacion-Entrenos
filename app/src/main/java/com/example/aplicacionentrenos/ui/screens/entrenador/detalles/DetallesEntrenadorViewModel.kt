@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplicacionentrenos.data.repository.EntrenadorRepository
 import com.example.aplicacionentrenos.data.sources.remote.utils.NetworkResult
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.UiEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -46,7 +47,7 @@ class DetallesEntrenadorViewModel @Inject constructor(
                     entrenadorRepository.getById(event.id)
                         .catch(action = { error ->
                             sendUiEvent(
-                                UiEvents.ShowSnackBar(error.message ?: "error")
+                                UiEvents.ShowSnackBar(error.message ?: Constantes.ERROR)
                             )
                         })
                         .collect { result ->
@@ -62,7 +63,7 @@ class DetallesEntrenadorViewModel @Inject constructor(
                                 is NetworkResult.Error -> {
                                     sendUiEvent(
                                         UiEvents.ShowSnackBar(
-                                            result.message ?: "Fallo"
+                                            result.message ?: Constantes.FALLO
                                         )
                                     )
                                     loading = false
@@ -81,20 +82,20 @@ class DetallesEntrenadorViewModel @Inject constructor(
                     entrenadorRepository.altaEnrenador(event.clienteDTO)
                         .catch(action = { error ->
                             sendUiEvent(
-                                UiEvents.ShowSnackBar(error.message ?: "error")
+                                UiEvents.ShowSnackBar(error.message ?: Constantes.ERROR)
                             )
                         })
                         .collect { result ->
                             when (result) {
                                 is NetworkResult.Success -> {
                                     loading = false
-                                    sendUiEvent(UiEvents.ShowSnackBar("Entrenador dado de alta correctamente"))
+                                    sendUiEvent(UiEvents.ShowSnackBar(Constantes.ENTRENADOR_ALTA_MSG))
 
                                 }
                                 is NetworkResult.Error -> {
                                     sendUiEvent(
                                         UiEvents.ShowSnackBar(
-                                            result.message ?: "Fallo"
+                                            result.message ?: Constantes.FALLO
                                         )
                                     )
                                     loading = false

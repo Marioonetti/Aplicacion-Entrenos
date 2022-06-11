@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplicacionentrenos.data.repository.EntrenosRepository
 import com.example.aplicacionentrenos.data.sources.remote.utils.NetworkResult
-import com.example.aplicacionentrenos.ui.screens.entrenamientos.general.EntrenoContract
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.NavigationConstants
 import com.example.aplicacionentrenos.utils.UiEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,8 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class EntrenoDetallesViewModel @Inject constructor(
     private val entrenosRepository: EntrenosRepository
-): ViewModel()
-{
+) : ViewModel() {
     var loading by mutableStateOf(false)
         private set
 
@@ -35,8 +34,8 @@ class EntrenoDetallesViewModel @Inject constructor(
     val uiEvent = _uiEvent.receiveAsFlow()
 
 
-    fun handleEvent(event : EntrenoDetallesContract.Eventos){
-        when(event){
+    fun handleEvent(event: EntrenoDetallesContract.Eventos) {
+        when (event) {
             is EntrenoDetallesContract.Eventos.IrDetalleEjercicio -> {
                 sendUiEvent(UiEvents.Navigate(NavigationConstants.NAVIGATE_TO_DETALLES_EJERCICIO + event.ejercicioId))
             }
@@ -45,7 +44,7 @@ class EntrenoDetallesViewModel @Inject constructor(
                     entrenosRepository.getById(event.id)
                         .catch(action = { error ->
                             sendUiEvent(
-                                UiEvents.ShowSnackBar(error.message ?: "error")
+                                UiEvents.ShowSnackBar(error.message ?: Constantes.ERROR)
                             )
                         })
                         .collect { result ->
@@ -61,7 +60,7 @@ class EntrenoDetallesViewModel @Inject constructor(
                                 is NetworkResult.Error -> {
                                     sendUiEvent(
                                         UiEvents.ShowSnackBar(
-                                            result.message ?: "Fallo"
+                                            result.message ?: Constantes.FALLO
                                         )
                                     )
                                     loading = false
@@ -75,7 +74,6 @@ class EntrenoDetallesViewModel @Inject constructor(
             }
         }
     }
-
 
 
     private fun sendUiEvent(event: UiEvents) {

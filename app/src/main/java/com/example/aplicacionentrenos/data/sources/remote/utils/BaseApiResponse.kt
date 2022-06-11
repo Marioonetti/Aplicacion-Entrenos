@@ -12,7 +12,7 @@ abstract class BaseApiResponse {
         apiCall: suspend () -> Response<R>,
         transform: (R) -> T
     ): NetworkResult<T> {
-        var result : NetworkResult<T> = NetworkResult.Empty()
+        var result: NetworkResult<T> = NetworkResult.Empty()
         try {
             val response = apiCall()
             if (response.isSuccessful) {
@@ -20,10 +20,10 @@ abstract class BaseApiResponse {
                 body?.let {
                     result = NetworkResult.Success(transform(body))
                 }
-            }
-            else{
+            } else {
                 response.errorBody()?.let { errorBody ->
-                    val apiError : ApiError = Gson().fromJson(errorBody.string(), ApiError::class.java)
+                    val apiError: ApiError =
+                        Gson().fromJson(errorBody.string(), ApiError::class.java)
                     result = NetworkResult.Error(apiError.mensaje)
                 }
             }
@@ -34,18 +34,18 @@ abstract class BaseApiResponse {
     }
 
     suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): NetworkResult<T> {
-        var result : NetworkResult<T> = NetworkResult.Empty()
+        var result: NetworkResult<T> = NetworkResult.Empty()
         try {
             val response = apiCall()
             if (response.isSuccessful) {
                 val body = response.body()
                 body?.let {
-                    result =  NetworkResult.Success(body)
+                    result = NetworkResult.Success(body)
                 }
-            }
-            else{
+            } else {
                 response.errorBody()?.let { errorBody ->
-                    val apiError : ApiError = Gson().fromJson(errorBody.string(), ApiError::class.java)
+                    val apiError: ApiError =
+                        Gson().fromJson(errorBody.string(), ApiError::class.java)
                     result = NetworkResult.Error(apiError.mensaje)
                 }
             }
@@ -54,7 +54,6 @@ abstract class BaseApiResponse {
         }
         return result
     }
-
 
 
 }

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplicacionentrenos.data.repository.EjericiciosRepository
 import com.example.aplicacionentrenos.data.sources.remote.utils.NetworkResult
-import com.example.aplicacionentrenos.ui.screens.entrenamientos.detalles.EntrenoDetallesContract
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.UiEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class EjercicioDetallesViewModel @Inject constructor(
     private val ejercicioRepository: EjericiciosRepository
-) : ViewModel(){
+) : ViewModel() {
 
     var loading by mutableStateOf(false)
         private set
@@ -33,9 +33,9 @@ class EjercicioDetallesViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvents>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun handleEvent(event : EjercicioDetallesContract.Eventos){
+    fun handleEvent(event: EjercicioDetallesContract.Eventos) {
 
-        when(event){
+        when (event) {
             is EjercicioDetallesContract.Eventos.Volver -> {
                 sendUiEvent(UiEvents.PopBackStack)
             }
@@ -45,7 +45,7 @@ class EjercicioDetallesViewModel @Inject constructor(
                     ejercicioRepository.getById(event.id)
                         .catch(action = { error ->
                             sendUiEvent(
-                                UiEvents.ShowSnackBar(error.message ?: "error")
+                                UiEvents.ShowSnackBar(error.message ?: Constantes.ERROR)
                             )
                         })
                         .collect { result ->
@@ -61,7 +61,7 @@ class EjercicioDetallesViewModel @Inject constructor(
                                 is NetworkResult.Error -> {
                                     sendUiEvent(
                                         UiEvents.ShowSnackBar(
-                                            result.message ?: "Fallo"
+                                            result.message ?: Constantes.FALLO
                                         )
                                     )
                                     loading = false
@@ -74,8 +74,6 @@ class EjercicioDetallesViewModel @Inject constructor(
                 }
 
 
-
-
             }
         }
 
@@ -86,7 +84,6 @@ class EjercicioDetallesViewModel @Inject constructor(
             _uiEvent.send(event)
         }
     }
-
 
 
 }

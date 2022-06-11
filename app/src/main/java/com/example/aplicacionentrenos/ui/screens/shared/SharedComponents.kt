@@ -3,17 +3,12 @@ package com.example.aplicacionentrenos.ui.screens.shared
 import android.os.Build.VERSION.SDK_INT
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Error
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.Insets.add
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
@@ -22,6 +17,7 @@ import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.size.OriginalSize
 import coil.size.Scale
+import com.example.aplicacionentrenos.utils.Constantes
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
@@ -40,13 +36,13 @@ fun ImagenPreview(ruta: String) {
             }.build()
 
         val painter = rememberImagePainter(
-            imageLoader = imgLoader ,
+            imageLoader = imgLoader,
             data = ruta,
             builder = {
-            size(OriginalSize)
+                size(OriginalSize)
                 scale(Scale.FILL)
                 crossfade(true)
-        })
+            })
 //        Estado de la imagen
         val painterState = painter.state
 
@@ -55,7 +51,7 @@ fun ImagenPreview(ruta: String) {
                 .width(210.dp)
                 .fillMaxHeight(),
             painter = painter,
-            contentDescription = "Imagen",
+            contentDescription = Constantes.CONTENT_DESCRIPTION,
             contentScale = ContentScale.Fit,
         )
 //        Si su estado es cargando, ponemos la ciruclar progress bar
@@ -71,7 +67,7 @@ fun ImagenPreview(ruta: String) {
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun ImagenHorizontalPeque(ruta: String, alto : Int) {
+fun ImagenHorizontalPeque(ruta: String, alto: Int) {
 
     Box {
 
@@ -86,7 +82,7 @@ fun ImagenHorizontalPeque(ruta: String, alto : Int) {
             }.build()
 
         val painter = rememberImagePainter(
-            imageLoader = imgLoader ,
+            imageLoader = imgLoader,
             data = ruta,
             builder = {
                 size(OriginalSize)
@@ -101,7 +97,7 @@ fun ImagenHorizontalPeque(ruta: String, alto : Int) {
                 .fillMaxWidth()
                 .height(alto.dp),
             painter = painter,
-            contentDescription = "Imagen",
+            contentDescription = Constantes.CONTENT_DESCRIPTION,
             contentScale = ContentScale.Crop,
         )
 //        Si su estado es cargando, ponemos la ciruclar progress bar
@@ -117,7 +113,7 @@ fun ImagenHorizontalPeque(ruta: String, alto : Int) {
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun GifImagenAjustadoCaja(ruta: String, alto : Int) {
+fun GifImagenAjustadoCaja(ruta: String, alto: Int) {
 
     Box {
 
@@ -132,7 +128,7 @@ fun GifImagenAjustadoCaja(ruta: String, alto : Int) {
             }.build()
 
         val painter = rememberImagePainter(
-            imageLoader = imgLoader ,
+            imageLoader = imgLoader,
             data = ruta,
             builder = {
                 size(OriginalSize)
@@ -147,7 +143,7 @@ fun GifImagenAjustadoCaja(ruta: String, alto : Int) {
                 .fillMaxWidth()
                 .height(alto.dp),
             painter = painter,
-            contentDescription = "Imagen",
+            contentDescription = Constantes.CONTENT_DESCRIPTION,
             contentScale = ContentScale.Fit,
         )
 //        Si su estado es cargando, ponemos la ciruclar progress bar
@@ -177,7 +173,7 @@ fun ImagenCompleta(ruta: String) {
 
         Image(
             painter = painter,
-            contentDescription = "Imagen",
+            contentDescription = Constantes.CONTENT_DESCRIPTION,
             contentScale = ContentScale.Crop,
         )
 //        Si su estado es cargando, ponemos la ciruclar progress bar
@@ -191,11 +187,10 @@ fun ImagenCompleta(ruta: String) {
 }
 
 
-
 @Composable
-fun LoadProgressBar(activacion : Boolean){
+fun LoadProgressBar(activacion: Boolean) {
 
-    if (activacion){
+    if (activacion) {
         CircularProgressIndicator()
     }
 

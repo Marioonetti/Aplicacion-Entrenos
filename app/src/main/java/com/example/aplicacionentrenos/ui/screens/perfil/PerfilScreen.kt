@@ -13,6 +13,7 @@ import com.example.aplicacionentrenos.domain.model.bo.Entrenador
 import com.example.aplicacionentrenos.domain.model.dto.ClienteDTO
 import com.example.aplicacionentrenos.ui.screens.shared.ImagenPreview
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.UiEvents
 import com.example.aplicacionentrenos.utils.UserCache
 import kotlinx.coroutines.flow.collect
@@ -139,7 +140,7 @@ private fun ShowTrainerData(
                 Button(onClick = {
                     viewModel.handleEvent(PerfilContract.Eventos.BajaEntrenador(cliente))
                 }) {
-                    Text(text = "Dar de baja")
+                    Text(text = Constantes.DAR_BAJA)
                 }
             }
         }

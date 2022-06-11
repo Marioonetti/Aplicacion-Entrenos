@@ -15,16 +15,16 @@ class EntrenadorDataSource @Inject constructor(
         transform = { it.map { entrenadorDto -> entrenadorDto.toEntrenador() } }
     )
 
-    suspend fun getById(id : Int) = safeApiCall(
+    suspend fun getById(id: Int) = safeApiCall(
         apiCall = { entrenadorService.getEntrenadorById(id) },
         transform = { it.toEntrenador() }
     )
 
-    suspend fun altaEntrenador(clienteDto : ClienteDTO) = safeApiCall(
+    suspend fun altaEntrenador(clienteDto: ClienteDTO) = safeApiCall(
         apiCall = { entrenadorService.altaEntrenador(clienteDto) }
     )
 
-    suspend fun bajaEntrenador(clienteDto : ClienteDTO) = safeApiCall(
+    suspend fun bajaEntrenador(clienteDto: ClienteDTO) = safeApiCall(
         apiCall = { entrenadorService.bajaEntrenador(clienteDto) }
     )
 

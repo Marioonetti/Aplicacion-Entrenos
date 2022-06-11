@@ -27,11 +27,12 @@ import com.example.aplicacionentrenos.ui.screens.ejercicios.general.EjerciciosSc
 import com.example.aplicacionentrenos.ui.screens.entrenador.detalles.EntrenadorDetallesScreen
 import com.example.aplicacionentrenos.ui.screens.entrenador.general.EntrenadoresScreen
 import com.example.aplicacionentrenos.ui.screens.entrenamientos.detalles.EntrenoDetallesScreen
+import com.example.aplicacionentrenos.ui.screens.entrenamientos.general.EntrenosScreen
 import com.example.aplicacionentrenos.ui.screens.main.MainScreen
 import com.example.aplicacionentrenos.ui.screens.perfil.PerfilScreen
-import com.example.aplicacionentrenos.ui.screens.entrenamientos.general.EntrenosScreen
 import com.example.aplicacionentrenos.ui.screens.registro.RegistroScreen
 import com.example.aplicacionentrenos.ui.screens.shared.BottomBarNavigation
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.NavigationConstants
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -69,28 +70,28 @@ class MainActivity : ComponentActivity() {
             BottomBarNavigation(
                 items = listOf(
                     BottomBarItem(
-                        "Ejercicios",
+                        Constantes.EJERCICIOS_NAME,
                         NavigationConstants.EJERCICIOS_ROUTE,
                         Icons.Default.FitnessCenter
                     ),
 
                     BottomBarItem(
-                        "Entrenadores",
+                        Constantes.EENTRENADORES_NAME,
                         NavigationConstants.ENTRENADORES_ROUTE,
                         Icons.Default.DirectionsRun
                     ),
                     BottomBarItem(
-                        "Entrenamientos",
+                        Constantes.ENTRENAMIENTO_NAME,
                         NavigationConstants.ENTRENAMIENTOS_SCREEN_ROUTE,
                         Icons.Default.Description
                     ),
                     BottomBarItem(
-                        "Perfil",
+                        Constantes.PERFIL_NAME,
                         NavigationConstants.PERFIL_ROUTE,
                         Icons.Default.AccountCircle
                     ),
                     BottomBarItem(
-                        "Logout",
+                        Constantes.LOGOUT,
                         NavigationConstants.MAIN_ROUTE,
                         Icons.Default.Logout
                     )
@@ -102,7 +103,7 @@ class MainActivity : ComponentActivity() {
                 bottomBarState = bottomBarState
             )
         }, content = {
-            Box(modifier = Modifier.padding(it)){
+            Box(modifier = Modifier.padding(it)) {
                 Navigation(navController)
             }
         }
@@ -141,7 +142,7 @@ fun Navigation(navController: NavHostController) {
             )
         }
         composable(NavigationConstants.PERFIL_ROUTE) {
-            PerfilScreen (
+            PerfilScreen(
                 onNavigate = { navController.navigate(it.route) }
             )
         }
@@ -164,7 +165,7 @@ fun Navigation(navController: NavHostController) {
                 it.arguments?.getInt(NavigationConstants.DETALLES_ENTRENADOR_ID_PARAM)
 
             EntrenadorDetallesScreen(
-                onPopBackStack = {navController.popBackStack()},
+                onPopBackStack = { navController.popBackStack() },
                 id
             )
         }
@@ -177,7 +178,7 @@ fun Navigation(navController: NavHostController) {
                 {
                     type = NavType.IntType
                 })
-        ) {navStack ->
+        ) { navStack ->
             val id =
                 navStack.arguments?.getInt(NavigationConstants.DETALLE_ENTRENOS_PARAM)
 
@@ -200,7 +201,7 @@ fun Navigation(navController: NavHostController) {
                 it.arguments?.getInt(NavigationConstants.DETALLE_EJERCICIO_PARAM)
 
             EjercicioDetalleScreen(
-                onPopBackStack = {navController.popBackStack()},
+                onPopBackStack = { navController.popBackStack() },
                 id
             )
         }

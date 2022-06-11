@@ -1,7 +1,6 @@
 package com.example.aplicacionentrenos.ui.screens.ejercicios.detalles
 
 import com.example.aplicacionentrenos.domain.model.dto.EjercicioDTO
-import com.example.aplicacionentrenos.domain.model.dto.EntrenoDTO
 
 interface EjercicioDetallesContract {
 

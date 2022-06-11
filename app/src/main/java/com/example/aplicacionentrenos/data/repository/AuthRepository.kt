@@ -14,22 +14,21 @@ import javax.inject.Inject
 @ActivityRetainedScoped
 class AuthRepository @Inject constructor(
     private val authDataSource: AuthDataSource
-){
+) {
 
-    fun login(userDTO: UserDTO) : Flow<NetworkResult<ClienteDTO>>{
-        return flow{
+    fun login(userDTO: UserDTO): Flow<NetworkResult<ClienteDTO>> {
+        return flow {
             emit(NetworkResult.Loading())
             emit(authDataSource.login(userDTO))
         }.flowOn(Dispatchers.IO)
     }
 
-    fun registro(clienteDTO: ClienteDTO) : Flow<NetworkResult<ClienteDTO>>{
-        return flow{
+    fun registro(clienteDTO: ClienteDTO): Flow<NetworkResult<ClienteDTO>> {
+        return flow {
             emit(NetworkResult.Loading())
             emit(authDataSource.registro(clienteDTO))
         }.flowOn(Dispatchers.IO)
     }
-
 
 
 }

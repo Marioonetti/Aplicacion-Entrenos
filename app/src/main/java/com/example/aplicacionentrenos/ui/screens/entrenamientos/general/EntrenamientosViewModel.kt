@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplicacionentrenos.data.repository.EntrenosRepository
 import com.example.aplicacionentrenos.data.sources.remote.utils.NetworkResult
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.NavigationConstants
 import com.example.aplicacionentrenos.utils.UiEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class EntrenamientosViewModel @Inject constructor(
     private val repository: EntrenosRepository
-) : ViewModel(){
+) : ViewModel() {
 
     var loading by mutableStateOf(false)
         private set
@@ -32,8 +33,8 @@ class EntrenamientosViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvents>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun handleEvent(event : EntrenoContract.Eventos){
-        when(event){
+    fun handleEvent(event: EntrenoContract.Eventos) {
+        when (event) {
 
             is EntrenoContract.Eventos.IrDetallesEntrenamiento -> {
                 sendUiEvent(
@@ -46,7 +47,7 @@ class EntrenamientosViewModel @Inject constructor(
                     repository.getAllAsc(event.id)
                         .catch(action = { error ->
                             sendUiEvent(
-                                UiEvents.ShowSnackBar(error.message ?: "error")
+                                UiEvents.ShowSnackBar(error.message ?: Constantes.ERROR)
                             )
                         })
                         .collect { result ->
@@ -57,7 +58,8 @@ class EntrenamientosViewModel @Inject constructor(
 
                                         it.copy(
                                             entrenamientos =
-                                            result.data?.sortedByDescending {entreno ->  entreno.fecha }?.asReversed()
+                                            result.data?.sortedByDescending { entreno -> entreno.fecha }
+                                                ?.asReversed()
                                                 ?: emptyList()
                                         )
                                     }
@@ -65,7 +67,7 @@ class EntrenamientosViewModel @Inject constructor(
                                 is NetworkResult.Error -> {
                                     sendUiEvent(
                                         UiEvents.ShowSnackBar(
-                                            result.message ?: "Fallo"
+                                            result.message ?: Constantes.FALLO
                                         )
                                     )
                                     loading = false
@@ -83,7 +85,7 @@ class EntrenamientosViewModel @Inject constructor(
                     repository.getAllDesc(event.id)
                         .catch(action = { error ->
                             sendUiEvent(
-                                UiEvents.ShowSnackBar(error.message ?: "error")
+                                UiEvents.ShowSnackBar(error.message ?: Constantes.ERROR)
                             )
                         })
                         .collect { result ->
@@ -92,14 +94,15 @@ class EntrenamientosViewModel @Inject constructor(
                                     loading = false
                                     _entrenos.update {
                                         it.copy(
-                                            entrenamientos = result.data?.sortedByDescending {entreno ->  entreno.fecha } ?: emptyList()
+                                            entrenamientos = result.data?.sortedByDescending { entreno -> entreno.fecha }
+                                                ?: emptyList()
                                         )
                                     }
                                 }
                                 is NetworkResult.Error -> {
                                     sendUiEvent(
                                         UiEvents.ShowSnackBar(
-                                            result.message ?: "Fallo"
+                                            result.message ?: Constantes.FALLO
                                         )
                                     )
                                     loading = false
@@ -121,7 +124,6 @@ class EntrenamientosViewModel @Inject constructor(
             _uiEvent.send(event)
         }
     }
-
 
 
 }

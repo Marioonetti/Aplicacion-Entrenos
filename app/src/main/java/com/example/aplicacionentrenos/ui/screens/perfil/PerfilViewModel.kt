@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.aplicacionentrenos.data.repository.EntrenadorRepository
 import com.example.aplicacionentrenos.data.repository.PerfilRepository
 import com.example.aplicacionentrenos.data.sources.remote.utils.NetworkResult
-import com.example.aplicacionentrenos.ui.screens.entrenamientos.general.EntrenoContract
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.NavigationConstants
 import com.example.aplicacionentrenos.utils.UiEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,22 +36,22 @@ class PerfilViewModel @Inject constructor(
     val uiEvent = _uiEvent.receiveAsFlow()
 
 
-    fun handleEvent(event : PerfilContract.Eventos){
+    fun handleEvent(event: PerfilContract.Eventos) {
 
-        when(event){
-            is PerfilContract.Eventos.BajaEntrenador ->{
+        when (event) {
+            is PerfilContract.Eventos.BajaEntrenador -> {
                 viewModelScope.launch {
                     entrenadorRepository.bajaEnrenador(event.cliente)
                         .catch(action = { error ->
                             sendUiEvent(
-                                UiEvents.ShowSnackBar(error.message ?: "error")
+                                UiEvents.ShowSnackBar(error.message ?: Constantes.ERROR)
                             )
                         })
                         .collect { result ->
                             when (result) {
                                 is NetworkResult.Success -> {
                                     loading = false
-                                    sendUiEvent(UiEvents.ShowSnackBar("Entrenador dado de baja correctamente"))
+                                    sendUiEvent(UiEvents.ShowSnackBar(Constantes.DAR_BAJA_OK))
                                     sendUiEvent(UiEvents.Navigate(NavigationConstants.PERFIL_ROUTE))
 
 
@@ -59,7 +59,7 @@ class PerfilViewModel @Inject constructor(
                                 is NetworkResult.Error -> {
                                     sendUiEvent(
                                         UiEvents.ShowSnackBar(
-                                            result.message ?: "Fallo"
+                                            result.message ?: Constantes.FALLO
                                         )
                                     )
                                     loading = false
@@ -78,7 +78,7 @@ class PerfilViewModel @Inject constructor(
                     perfilRepository.getById(event.id)
                         .catch(action = { error ->
                             sendUiEvent(
-                                UiEvents.ShowSnackBar(error.message ?: "error")
+                                UiEvents.ShowSnackBar(error.message ?: Constantes.ERROR)
                             )
                         })
                         .collect { result ->
@@ -90,14 +90,14 @@ class PerfilViewModel @Inject constructor(
                                             cliente = result.data
                                         )
                                     }
-                                    if (result.data?.idEntrenador !=0){
+                                    if (result.data?.idEntrenador != 0) {
                                         handleEvent(PerfilContract.Eventos.GetEntrenadorById(result.data?.idEntrenador!!))
                                     }
                                 }
                                 is NetworkResult.Error -> {
                                     sendUiEvent(
                                         UiEvents.ShowSnackBar(
-                                            result.message ?: "Fallo"
+                                            result.message ?: Constantes.FALLO
                                         )
                                     )
                                     loading = false
@@ -116,7 +116,7 @@ class PerfilViewModel @Inject constructor(
                     entrenadorRepository.getById(event.idEntrenador)
                         .catch(action = { error ->
                             sendUiEvent(
-                                UiEvents.ShowSnackBar(error.message ?: "error")
+                                UiEvents.ShowSnackBar(error.message ?: Constantes.ERROR)
                             )
                         })
                         .collect { result ->
@@ -132,7 +132,7 @@ class PerfilViewModel @Inject constructor(
                                 is NetworkResult.Error -> {
                                     sendUiEvent(
                                         UiEvents.ShowSnackBar(
-                                            result.message ?: "Fallo"
+                                            result.message ?: Constantes.FALLO
                                         )
                                     )
                                     loading = false
@@ -148,7 +148,6 @@ class PerfilViewModel @Inject constructor(
         }
 
     }
-
 
 
     private fun sendUiEvent(event: UiEvents) {

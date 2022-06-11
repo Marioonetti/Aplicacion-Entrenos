@@ -15,23 +15,7 @@ import com.example.aplicacionentrenos.utils.UiEvents
 @Composable
 fun MainScreen(onNavigate: (UiEvents.Navigate) -> Unit,) {
 
-        Row(
-            modifier = Modifier
-                .fillMaxSize(),
-            verticalAlignment = Alignment.Top,
-            horizontalArrangement = Arrangement.Center
-        ) {
-
-            Box(modifier = Modifier
-                .clip(RoundedCornerShape(10.dp))
-                .width(320.dp)
-                .height(450.dp)
-                .background(GrisFondo)
-
-            ) {
-                LoginBox(onNavigate = onNavigate)
-            }
-        }
+    LoginBox(onNavigate = onNavigate)
 
 
 }

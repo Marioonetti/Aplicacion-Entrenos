@@ -20,14 +20,15 @@ object NetworkModule {
     @Singleton
     @Provides
     @ServiceInterceptorAnottation
-    fun provideInterceptor() : Interceptor =  ServiceInterceptor()
+    fun provideInterceptor(): Interceptor = ServiceInterceptor()
 
 
     @Singleton
     @Provides
     fun provideHttpClient(
         @ServiceInterceptorAnottation
-        interceptor : Interceptor): OkHttpClient {
+        interceptor: Interceptor
+    ): OkHttpClient {
         return OkHttpClient
             .Builder()
             .readTimeout(15, TimeUnit.SECONDS)

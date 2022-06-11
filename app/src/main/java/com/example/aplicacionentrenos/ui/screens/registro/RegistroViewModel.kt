@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplicacionentrenos.data.repository.AuthRepository
 import com.example.aplicacionentrenos.data.sources.remote.utils.NetworkResult
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.NavigationConstants
 import com.example.aplicacionentrenos.utils.UiEvents
-import com.example.aplicacionentrenos.utils.UserCache
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.catch
@@ -21,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegistroViewModel @Inject constructor(
     private val authRepository: AuthRepository
-) : ViewModel(){
+) : ViewModel() {
 
 
     var hidden by mutableStateOf(true)
@@ -45,8 +45,8 @@ class RegistroViewModel @Inject constructor(
     val uiEvent = _uiEvent.receiveAsFlow()
 
 
-    fun handleEvent(event : RegistroContract.Eventos){
-        when(event){
+    fun handleEvent(event: RegistroContract.Eventos) {
+        when (event) {
             is RegistroContract.Eventos.NavigateToLogin -> {
                 sendUiEvent(UiEvents.Navigate(NavigationConstants.MAIN_ROUTE))
             }
@@ -54,7 +54,7 @@ class RegistroViewModel @Inject constructor(
                 taNombre = event.nombre
             }
             is RegistroContract.Eventos.OnApellidosChange -> {
-                taApellidos  = event.apellidos
+                taApellidos = event.apellidos
             }
             is RegistroContract.Eventos.OnUsernameChange -> {
                 taUsername = event.username
@@ -67,19 +67,19 @@ class RegistroViewModel @Inject constructor(
                     authRepository.registro(event.clienteDTO)
                         .catch(action = { error ->
                             sendUiEvent(
-                                UiEvents.ShowSnackBar(error.message ?: "error")
+                                UiEvents.ShowSnackBar(error.message ?: Constantes.ERROR)
                             )
                         })
                         .collect { result ->
                             when (result) {
                                 is NetworkResult.Success -> {
                                     loading = false
-                                    sendUiEvent(UiEvents.ShowSnackBar("Usuario Registrado"))
+                                    sendUiEvent(UiEvents.ShowSnackBar(Constantes.USER_REGISTRADO))
                                 }
                                 is NetworkResult.Error -> {
                                     sendUiEvent(
                                         UiEvents.ShowSnackBar(
-                                            result.message ?: "Fallo"
+                                            result.message ?: Constantes.FALLO
                                         )
                                     )
                                     loading = false

@@ -1,6 +1,5 @@
 package com.example.aplicacionentrenos.ui.screens.entrenamientos.general
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,10 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.example.aplicacionentrenos.domain.model.bo.Entreno
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
 import com.example.aplicacionentrenos.ui.theme.blancoFloral
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.UiEvents
 import com.example.aplicacionentrenos.utils.UserCache
 import kotlinx.coroutines.flow.collect
@@ -60,7 +59,7 @@ fun EntrenosScreen(
             if (listaEntrenos.isEmpty()) {
                 NoEntrenos()
             } else {
-                DropDownMenu(lista = listOf("Fecha Descendente", "Fecha Ascendente"), viewModel)
+                DropDownMenu(lista = listOf(Constantes.FECHA_DESC, Constantes.FECHA_ASC), viewModel)
                 LazyColumn {
                     items(listaEntrenos) { entreno ->
                         EntrenoItem(entreno, viewModel::handleEvent)
@@ -84,8 +83,7 @@ private fun EntrenoItem(
             .height(250.dp)
             .clickable {
                 handleEvent(EntrenoContract.Eventos.IrDetallesEntrenamiento(entreno.id))
-            }
-        ,
+            },
         elevation = 5.dp,
         backgroundColor = blancoFloral
     ) {
@@ -133,7 +131,7 @@ private fun NoEntrenos() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "No tienes Entrenos aún disponibles",
+            text = Constantes.ENTRENOS_NO__DISPO,
             style = MaterialTheme.typography.h4
         )
     }
@@ -186,10 +184,9 @@ fun DropDownMenu(
                         onClick = {
                             selectedOptionText = selectionOption
                             expanded = false
-                            if (selectionOption == lista[0]){
+                            if (selectionOption == lista[0]) {
                                 viewModel.handleEvent(EntrenoContract.Eventos.GetAllDesc(UserCache.id!!))
-                            }
-                            else{
+                            } else {
                                 viewModel.handleEvent(EntrenoContract.Eventos.GetAllAsc(UserCache.id!!))
                             }
                         }

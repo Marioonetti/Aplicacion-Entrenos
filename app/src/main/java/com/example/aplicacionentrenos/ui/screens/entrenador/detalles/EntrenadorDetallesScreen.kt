@@ -17,6 +17,7 @@ import com.example.aplicacionentrenos.domain.model.bo.Entrenador
 import com.example.aplicacionentrenos.domain.model.dto.ClienteDTO
 import com.example.aplicacionentrenos.ui.screens.shared.ImagenCompleta
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.UiEvents
 import com.example.aplicacionentrenos.utils.UserCache
 import kotlinx.coroutines.flow.collect
@@ -68,7 +69,7 @@ fun EntrenadorDetallesScreen(
 private fun EntrenadorOverView(
     entrenador: Entrenador,
     viewModel: DetallesEntrenadorViewModel
-){
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -91,7 +92,7 @@ private fun EntrenadorOverView(
 @Composable
 private fun EntrenadorInfo(
     entrenador: Entrenador
-){
+) {
     Column(
         modifier = Modifier.height(150.dp),
         verticalArrangement = Arrangement.SpaceEvenly
@@ -132,10 +133,10 @@ private fun EntrenadorInfo(
 private fun DescripcionBoton(
     entrenador: Entrenador,
     viewModel: DetallesEntrenadorViewModel
-){
+) {
     Column {
         Text(
-            text = "Descripción: ",
+            text = Constantes.DESCRIPCION,
             style = MaterialTheme.typography.h5
         )
 
@@ -152,20 +153,24 @@ private fun DescripcionBoton(
             )
         )
     }) {
-        Text(text = "Contratar")
+        Text(text = Constantes.CONTRATAR)
     }
 
 }
 
 @Composable
 private fun BackArrow(viewModel: DetallesEntrenadorViewModel) {
-    Row(modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Start) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Start
+    ) {
         IconButton(onClick = {
             viewModel.handleEvent(DetallesEntrenadorContract.Eventos.Volver)
         }) {
-            Icon(imageVector = Icons.Default.ArrowBack ,
-                contentDescription = "Volver")
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = Constantes.VOLVER
+            )
         }
     }
 

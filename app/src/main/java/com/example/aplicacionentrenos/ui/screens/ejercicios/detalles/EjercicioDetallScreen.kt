@@ -17,6 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.aplicacionentrenos.domain.model.dto.EjercicioDTO
 import com.example.aplicacionentrenos.ui.screens.shared.GifImagenAjustadoCaja
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
 
@@ -82,7 +83,7 @@ private fun EjercicioOverView(
                     viewModel.handleEvent(EjercicioDetallesContract.Eventos.Volver)
                 }) {
                     Icon(imageVector = Icons.Default.ArrowBack ,
-                        contentDescription = "Volver")
+                        contentDescription = Constantes.CONTENT_DESCRIPTION)
                 }
 
                 Text(

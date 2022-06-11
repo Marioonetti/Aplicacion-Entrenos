@@ -1,7 +1,5 @@
 package com.example.aplicacionentrenos.domain.datamappers
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.example.aplicacionentrenos.domain.model.bo.Entrenador
 import com.example.aplicacionentrenos.domain.model.bo.Entreno
 import com.example.aplicacionentrenos.domain.model.dto.EntrenadorDTO

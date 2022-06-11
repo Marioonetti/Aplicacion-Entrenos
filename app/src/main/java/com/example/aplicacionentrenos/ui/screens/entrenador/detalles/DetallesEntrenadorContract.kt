@@ -5,7 +5,7 @@ import com.example.aplicacionentrenos.domain.model.dto.ClienteDTO
 
 interface DetallesEntrenadorContract {
 
-    sealed class Eventos{
+    sealed class Eventos {
         data class AltaEntrenador(val clienteDTO: ClienteDTO) : Eventos()
         data class PedirEntrenador(val id: Int) : Eventos()
         object Volver : Eventos()

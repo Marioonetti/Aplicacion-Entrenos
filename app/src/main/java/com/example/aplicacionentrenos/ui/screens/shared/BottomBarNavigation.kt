@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.aplicacionentrenos.domain.model.bo.BottomBarItem
-import com.example.aplicacionentrenos.ui.theme.GrisFondo
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.UserCache
 
 @Composable
@@ -29,7 +29,7 @@ fun BottomBarNavigation(
     onItemClick: (BottomBarItem) -> Unit,
     bottomBarState: MutableState<Boolean>
 ) {
-    
+
     AnimatedVisibility(
         visible = bottomBarState.value,
         enter = slideInVertically(initialOffsetY = { -it }),
@@ -44,18 +44,21 @@ fun BottomBarNavigation(
                     BottomNavigationItem(
                         selected = selected,
                         onClick = {
-                            if (item.nombre == "Logout"){
-                                UserCache.username =""
+                            if (item.nombre == Constantes.LOGOUT) {
+                                UserCache.username = ""
                                 UserCache.token = ""
                                 UserCache.password = ""
                                 UserCache.id = null
                             }
-                            onItemClick(item) },
+                            onItemClick(item)
+                        },
                         selectedContentColor = Color.Blue,
                         unselectedContentColor = Color.White,
                         icon = {
-                            Column(verticalArrangement = Arrangement.SpaceEvenly,
-                            horizontalAlignment = Alignment.CenterHorizontally)
+                            Column(
+                                verticalArrangement = Arrangement.SpaceEvenly,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            )
                             {
                                 Icon(
                                     imageVector = item.icon,
@@ -74,7 +77,6 @@ fun BottomBarNavigation(
                 }
             }
         })
-
 
 
 }

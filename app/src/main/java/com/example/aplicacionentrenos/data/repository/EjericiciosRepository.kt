@@ -15,29 +15,27 @@ class EjericiciosRepository @Inject constructor(
     private val ejerciciosDataSource: EjerciciosDataSource
 ) {
 
-    fun getAll() : Flow<NetworkResult<List<EjercicioDTO>>> {
-        return flow{
+    fun getAll(): Flow<NetworkResult<List<EjercicioDTO>>> {
+        return flow {
             emit(NetworkResult.Loading())
             emit(ejerciciosDataSource.getAll())
         }.flowOn(Dispatchers.IO)
     }
 
-    fun getById(id : Int) : Flow<NetworkResult<EjercicioDTO>> {
-        return flow{
+    fun getById(id: Int): Flow<NetworkResult<EjercicioDTO>> {
+        return flow {
             emit(NetworkResult.Loading())
             emit(ejerciciosDataSource.getById(id))
         }.flowOn(Dispatchers.IO)
     }
 
 
-    fun getByName(value :String) : Flow<NetworkResult<List<EjercicioDTO>>> {
-        return flow{
+    fun getByName(value: String): Flow<NetworkResult<List<EjercicioDTO>>> {
+        return flow {
             emit(NetworkResult.Loading())
             emit(ejerciciosDataSource.getByName(value))
         }.flowOn(Dispatchers.IO)
     }
-
-
 
 
 }

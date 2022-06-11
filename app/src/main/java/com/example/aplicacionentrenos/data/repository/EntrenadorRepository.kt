@@ -47,5 +47,4 @@ class EntrenadorRepository @Inject constructor(
     }
 
 
-
 }

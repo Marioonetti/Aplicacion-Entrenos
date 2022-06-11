@@ -23,6 +23,7 @@ import com.example.aplicacionentrenos.ui.screens.shared.ImagenHorizontalPeque
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
 import com.example.aplicacionentrenos.ui.theme.GrisFondo
 import com.example.aplicacionentrenos.ui.theme.amarilloApagado
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
 
@@ -30,12 +31,9 @@ import kotlinx.coroutines.flow.collect
 fun EjerciciosScreen(
     onNavigate: (UiEvents.Navigate) -> Unit,
     viewModel: EjerciciosViewModel = hiltViewModel()
-){
+) {
 
-    val listaEjercicios = viewModel.ejercicios.
-    collectAsState().
-    value.
-    ejercicios
+    val listaEjercicios = viewModel.ejercicios.collectAsState().value.ejercicios
 
     val scaffoldState = rememberScaffoldState()
     LaunchedEffect(key1 = true) {
@@ -60,14 +58,15 @@ fun EjerciciosScreen(
         modifier = Modifier.fillMaxSize()
     ) {
 
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(it)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+        ) {
             SearchTextField(viewModel)
 
-            LazyColumn{
-                items(listaEjercicios){
-                        ejercicio ->
+            LazyColumn {
+                items(listaEjercicios) { ejercicio ->
                     EjercicioItem(ejercicio, viewModel::handleEvent)
                 }
 
@@ -112,10 +111,10 @@ private fun OverviewEjercicio(ejercicio: EjercicioDTO) {
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
-            Text(
-                text = ejercicio.nombre,
-                style = MaterialTheme.typography.h5,
-            )
+        Text(
+            text = ejercicio.nombre,
+            style = MaterialTheme.typography.h5,
+        )
         Text(
             text = ejercicio.intensidad,
             style = MaterialTheme.typography.h5,
@@ -126,12 +125,13 @@ private fun OverviewEjercicio(ejercicio: EjercicioDTO) {
 }
 
 
-
 @Composable
 private fun SearchTextField(viewModel: EjerciciosViewModel) {
 
-    Row(modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center
+    ) {
         OutlinedTextField(
             modifier =
             Modifier
@@ -147,15 +147,17 @@ private fun SearchTextField(viewModel: EjerciciosViewModel) {
             trailingIcon = {
                 IconButton(
                     onClick = {
-                        viewModel.handleEvent(EjerciciosContract.Eventos.BuscarEjercicios(viewModel.searchText.trim())) }
+                        viewModel.handleEvent(EjerciciosContract.Eventos.BuscarEjercicios(viewModel.searchText.trim()))
+                    }
                 ) {
                     Icon(
                         imageVector = Icons.Default.Search,
-                        contentDescription = "Search")
+                        contentDescription = Constantes.CONTENT_DESCRIPTION
+                    )
                 }
             },
             label = {
-                Text(text = "Nombre del ejercicio")
+                Text(text = Constantes.NOMBRE_EJERCICIO)
             }
         )
     }

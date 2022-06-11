@@ -106,7 +106,13 @@ private fun PintaSeries(
                         .padding(5.dp)
                         .clip(RectangleShape)
                         .border(1.dp, MaterialTheme.colors.onSurface.copy(alpha = 0.5f))
-                        .clickable { viewModel.handleEvent(EntrenoDetallesContract.Eventos.IrDetalleEjercicio(it.ejercicio.id)) },
+                        .clickable {
+                            viewModel.handleEvent(
+                                EntrenoDetallesContract.Eventos.IrDetalleEjercicio(
+                                    it.ejercicio.id
+                                )
+                            )
+                        },
                     horizontalArrangement = Arrangement.Center,
                 ) {
                     Text(text = it.ejercicio.nombre, style = MaterialTheme.typography.h6)

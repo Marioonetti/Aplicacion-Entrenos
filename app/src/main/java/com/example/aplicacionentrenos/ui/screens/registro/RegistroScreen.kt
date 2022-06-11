@@ -1,6 +1,5 @@
 package com.example.aplicacionentrenos.ui.screens.registro
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -13,7 +12,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -21,9 +19,8 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.aplicacionentrenos.domain.model.dto.ClienteDTO
-import com.example.aplicacionentrenos.ui.screens.login.LoginBox
 import com.example.aplicacionentrenos.ui.screens.shared.LoadProgressBar
-import com.example.aplicacionentrenos.ui.theme.GrisFondo
+import com.example.aplicacionentrenos.utils.Constantes
 import com.example.aplicacionentrenos.utils.UiEvents
 import kotlinx.coroutines.flow.collect
 
@@ -62,10 +59,11 @@ fun RegistroScreen(
         horizontalArrangement = Arrangement.Center
     ) {
 
-        Box(modifier = Modifier
-            .clip(RoundedCornerShape(10.dp))
-            .width(320.dp)
-            .height(600.dp)
+        Box(
+            modifier = Modifier
+                .clip(RoundedCornerShape(10.dp))
+                .width(320.dp)
+                .height(600.dp)
         ) {
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -78,7 +76,7 @@ fun RegistroScreen(
                     onValueChange = {
                         viewModel.handleEvent(RegistroContract.Eventos.OnNombreChange(it))
                     },
-                    label = { Text(text = "Nombre") },
+                    label = { Text(text = Constantes.NOMBRE) },
                     singleLine = true
                 )
 
@@ -87,7 +85,7 @@ fun RegistroScreen(
                     onValueChange = {
                         viewModel.handleEvent(RegistroContract.Eventos.OnApellidosChange(it))
                     },
-                    label = { Text(text = "Apellidos") },
+                    label = { Text(text = Constantes.APELLIDOS) },
                     singleLine = true
                 )
 
@@ -96,7 +94,7 @@ fun RegistroScreen(
                     onValueChange = {
                         viewModel.handleEvent(RegistroContract.Eventos.OnUsernameChange(it))
                     },
-                    label = { Text(text = "Usuario") },
+                    label = { Text(text = Constantes.USUARIO) },
                     singleLine = true
                 )
 
@@ -107,15 +105,18 @@ fun RegistroScreen(
                     },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                     singleLine = true,
-                    label = { Text(text = "Contraseña") },
+                    label = { Text(text = Constantes.PASSW) },
                     visualTransformation = if (viewModel.hidden)
                         PasswordVisualTransformation() else VisualTransformation.None,
                     trailingIcon = {
                         IconButton(onClick = { viewModel.hidden = !viewModel.hidden }) {
-                            val vector : ImageVector =
+                            val vector: ImageVector =
                                 if (viewModel.hidden) Icons.Default.VisibilityOff
                                 else Icons.Default.Visibility
-                            Icon(imageVector = vector, contentDescription = "Ojo")
+                            Icon(
+                                imageVector = vector,
+                                contentDescription = Constantes.CONTENT_DESCRIPTION
+                            )
                         }
                     }
                 )
@@ -127,15 +128,22 @@ fun RegistroScreen(
                     Button(onClick = {
                         viewModel.handleEvent(RegistroContract.Eventos.NavigateToLogin)
                     }) {
-                        Text(text = "Login")
+                        Text(text = Constantes.LOGINN)
                     }
 
                     Button(onClick = {
-                        viewModel.handleEvent(RegistroContract.Eventos.Registrarse(
-                            ClienteDTO(viewModel.taUsername, viewModel.taPassw, viewModel.taNombre, viewModel.taApellidos)
-                        ))
+                        viewModel.handleEvent(
+                            RegistroContract.Eventos.Registrarse(
+                                ClienteDTO(
+                                    viewModel.taUsername,
+                                    viewModel.taPassw,
+                                    viewModel.taNombre,
+                                    viewModel.taApellidos
+                                )
+                            )
+                        )
                     }) {
-                        Text(text = "Registrarse")
+                        Text(text = Constantes.REGISTRARSE)
                     }
 
                 }
@@ -144,8 +152,6 @@ fun RegistroScreen(
             }
         }
     }
-
-
 
 
 }

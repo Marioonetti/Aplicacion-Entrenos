@@ -2,20 +2,11 @@ package com.example.aplicacionentrenos.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
 val Purple500 = Color(0xFF6200EE)
 val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 val GrisFondo = Color(0xffeeeeee)
-val AzulLogin = Color(0xffd1eaf9)
-val primaryColor2 = Color(0XFFbbdefb)
-val primaryLightColor2 = Color(0XFFeeffff)
-val primaryDarkColor2 = Color(0XFF8aacc8)
-val secondaryColor2 = Color(0XFF212121)
-val secondaryLightColor2 = Color(0XFF484848)
-val secondaryTextColor2 = Color(0XFFffffff)
 val amarilloApagado = Color(0XFFd3b789)
-
 
 
 //Colores App
