@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Mario/StudioProjects/Aplicacion-Entrenos/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1415" />
         <entry key="..\:/Users/Mario/StudioProjects/Aplicacion-Entrenos/app/src/main/res/drawable/visibility-48px.xml" value="0.1" />
         <entry key="..\:/Users/Mario/StudioProjects/Aplicacion-Entrenos/app/src/main/res/drawable/visibility_off-48px.xml" value="0.1" />
+        <entry key="..\:/Users/Mario/StudioProjects/Aplicacion-Entrenos/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1415" />
         <entry key="..\:/tfgApps/Aplicacion-Entrenos/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
       </map>
     </option>
