@@ -6,7 +6,6 @@ object RestConstants {
     const val LOGIN_PATH = "login/cliente"
     const val REGISTER_PATH = "registro/cliente"
 
-
     const val EJERCICIOS_PATH = "ejercicios"
     const val EJERCICIO_PATH_PARAM = "/{id}"
     const val EJERCICIO_BY_NAME_PATH = "/nombre"
